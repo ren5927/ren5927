@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box>div {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            margin: 20px 0 0 10px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button>生成10个div</button>
+    </div>
+    <div id="box">
+        
+    </div>
+    <script>
+        var oBtn = document.querySelector("button");
+        var oBox = document.getElementById("box");
+        oBtn.onclick = function () {
+            oBox.innerHTML="<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>"
+        }
+    </script>
+</body>
+
+</html>

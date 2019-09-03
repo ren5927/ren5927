@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box1 {
+            width: 650px;
+            height: 300px;
+            margin: 100px auto 0 auto;
+            position: relative;
+        }
+
+        img {
+            width: 650px;
+            height: 300px;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .block {
+            display: block;
+        }
+
+        span {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.6);
+            font-size: 30px;
+            text-align: center;
+            line-height: 40px;
+            color: #f2f2f2;
+            cursor: pointer;
+        }
+
+        .btn1 {
+            position: absolute;
+            left: 0;
+            top: 130px;
+        }
+
+        .btn2 {
+            position: absolute;
+            right: 0;
+            top: 130px;
+        }
+
+        p {
+            width: 100%;
+            height: 25px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #f2f2f2;
+            text-align: center
+        }
+
+        .p1 {
+            position: absolute;
+            top: 0;
+        }
+
+        .p2 {
+            position: absolute;
+            bottom: 0;
+        }
+
+        #box2 {
+            width: 600px;
+            height: 100px;
+            margin: 30px auto;
+        }
+
+        button {
+            width: 150px;
+            height: 50px;
+            cursor: pointer;
+            margin-left: 90px;
+        }
+
+        .onclicked {
+            background-color: red;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1">
+        <img src="./img/2.jpg" alt="" class="block">
+        <img src="./img/3.jpg" alt="" class="none">
+        <img src="./img/4.jpg" alt="" class="none">
+        <img src="./img/5.jpg" alt="" class="none">
+        <img src="./img/6.jpg" alt="" class="none">
+        <span class="btn1">&lt;</span>
+        <span class="btn2">&gt;</span>
+        <p class="p1">1/5</p>
+        <p class="p2">z</p>
+    </div>
+    <div id="box2">
+        <button class="onclicked">正常模式</button>
+        <button>循环模式</button>
+    </div>
+    <script>  
+        var aBtn = document.querySelectorAll("button");
+        var aSpan = document.querySelectorAll("span");
+        var aImg = document.querySelectorAll("img");
+        var aP = document.querySelectorAll("p");
+        var num = 0
+        var bol1 = true;
+        var strArr=["z","q","m","y","baby"];
+     
+        aSpan[0].onclick = function () {
+            f1(bol1, true);
+        }
+
+        aSpan[1].onclick = function () {
+            f1(bol1, false);
+        }
+
+
+
+        function f1(bol1, bol2) {
+            var s = num;
+            if (bol1) {
+                if (bol2) {
+                    if (num < 1) return;
+                } else {
+                    if (num > 3) return;
+                }
+            } else {
+                if (bol2) {
+                    if (num <= 0) num = 5;
+                } else {
+                    if (num >= 4) num = -1;
+                }
+            }
+            bol2 ? num-- : num++;
+            aImg[num].className = "block";
+            aImg[s].className = "none";
+            aP[1].innerHTML = strArr[num];
+            aP[0].innerHTML = num + 1 + "/5";
+        }
+        
+        //按钮
+        aBtn[0].onclick = function () {
+            this.className = "onclicked"
+            aBtn[1].className = "";
+            bol1 = true;
+        }
+        aBtn[1].onclick = function () {
+            this.className = "onclicked"
+            aBtn[0].className = "";
+            bol1 = false;
+        }
+        
+    </script>
+
+</body>
+
+</html>

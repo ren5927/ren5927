@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.
+        var c=1;
+        var s=0;
+        function f1(a){
+            for(var j=1;j<=a;j++){
+                c*=j;
+                s+=c;
+            }
+            return(s);
+        }
+        console.log(f1(10));
+        console.log(c);
+
+        // 2. 
+        var fun = function (a) {
+            var c = 1;
+            for (var j = 1; j <= a; j++) {
+                c *= j;
+            }
+            return (c);
+        }
+        for (var i = 100; i < 1000; i++) {
+            var gw = i % 10;
+            var sw = ((i - gw) / 10) % 10;
+            var bw = (i - gw - 10 * sw) / 100;
+            if (fun(bw) + fun(sw) + fun(gw) == i) {
+                console.log(i);
+            }
+        }
+
+        // 3.
+        function a(n) {
+            for (var sum = 0; n != 0; sum = sum * 10 + b) {
+                var b = n % 10;
+                n = parseInt(n / 10);
+            }
+            return sum;
+        }
+        var b = a(prompt('请输入一个整数'));
+        alert(b);
+
+        // 4.
+        var f1=function (a){
+            var s=0;
+            for(i=1;i<=a;i++){
+                if(a%i==0){
+                    s+=i;
+                }
+            }
+            return(s-a);
+        }
+        for(var j=1;j<=3000;j++){
+           var k=f1(j);//k=j全部约数
+           if(j==f1(k)){
+            console.log(j,k);
+           }
+        }
+
+        // 5.
+        var a = Number(prompt("输入一个数"));
+        var b = Number(prompt("输入第二个数"));
+
+        function f1(a, b) {
+            return (a + b)
+        }
+        alert(f1(a, b));
+
+        // 6.
+
+        function f2(a) {
+            switch (a) {
+                case 1:
+                    a = "一";
+                    break;
+                case 2:
+                    a = "二";
+                    break;
+                case 3:
+                    a = "三";
+                    break;
+                case 4:
+                    a = "四";
+                    break;
+                case 5:
+                    a = "五";
+                    break;
+                case 6:
+                    a = "六";
+                    break;
+                case 7:
+                    a = "七";
+                    break;
+                case 8:
+                    a = "八";
+                    break;
+                case 9:
+                    a = "九";
+                    break;
+                default:
+                    a = "零";
+                    break;
+            }
+            return (a);
+        }
+        var f= Number(prompt("输入一个正整数"));
+        function f3(n) {
+            for (var s = 0; n != 0; s++) {
+                var b = n % 10;
+                n = parseInt(n / 10);
+            }
+            return s;
+        }
+
+        var b=f3(f);
+        var str="";
+        for(d=1;d<=b;d++){ 
+            var g=f%10 
+            str=str+f2(g);
+            f=parseInt(f/10); 
+        }
+        alert(str);
+    </script>
+</body>
+
+</html>

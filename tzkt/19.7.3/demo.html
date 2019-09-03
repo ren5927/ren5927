@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .zero {
+            width: 320px;
+            height: 320px;
+            position: relative;
+        }
+
+        span {
+            display: block;
+        }
+            /* 最外边的圈圈 */
+        .fir {
+            width: 160px;
+            height: 320px;
+            background-color: #db3d3c;
+            border-radius: 160px 0px 0 160px;
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: cartoon 5s linear infinite alternate;
+        }
+        /* 初始白色的圈圈 */
+        .sec {
+            width: 135px;
+            height: 270px;
+            background-color: #f1f1f1;
+            border-radius: 135px 0px 0 135px;
+            position: absolute;
+            left: 25px;
+            top: 25px;
+            z-index: 3;
+            opacity: 0.9;
+            animation: cartoon1 5s linear infinite alternate;
+        }
+        /* 初始黄色的圈圈 */
+        .thi {
+            width: 270px;
+            height: 135px;
+            background-color: #f7d245;
+            border-radius: 135px 135px 0 0;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            z-index: 2;
+            opacity: 0.9;
+            animation: cartoon2 5s linear infinite alternate;
+        }
+        /* 鹦鹉嘴巴 */
+        .fou {
+            width: 70px;
+            height: 70px;
+            background-color: #f5a603;
+            border-radius: 0 0 70px 0;
+            position: absolute;
+            top: 160px;
+            left: 160px;
+            z-index: 4;
+            animation: cartoon3 5s linear infinite alternate;
+        }
+        /* 鹦鹉眼睛 */
+        .point {
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 118px;
+            left: 118px;
+            z-index: 5;
+            animation: cartoon4 5s linear infinite alternate;
+        }
+
+        /* 最外圈 */
+        @keyframes cartoon {
+            0% {
+                background-color: #db3d3c;
+                transform: rotate(0deg);
+                transform-origin: right 50%;
+            }
+
+            25% {
+                background-color: #db3d3c;
+                transform: rotate(0deg);
+                transform-origin: right 50%;
+            }
+
+            75% {
+                background-color: #1fe7b6;
+                transform: rotate(180deg);
+                transform-origin: right 50%;
+
+            }
+
+            100% {
+                background-color: #1fe7b6;
+                transform: rotate(180deg);
+                transform-origin: right 50%;
+
+            }
+        }
+        /* 初始白色圈 */
+        @keyframes cartoon1 {
+            0% {
+                background-color: #fff;
+                transform: rotate(0deg);
+                transform-origin: right 50%;
+            }
+
+            25% {
+                background-color: #fff;
+                transform: rotate(0deg);
+                transform-origin: right 50%;
+            }
+
+            75% {
+                background-color: #f7d245;
+                transform: rotate(-270deg);
+                transform-origin: right 50%;
+                z-index: 2;
+            }
+
+            100% {
+                background-color: #f7d245;
+                transform: rotate(-270deg);
+                transform-origin: right 50%;
+                z-index: 2;
+            }
+
+        }
+        /* 初始黄色圈 */
+        @keyframes cartoon2 {
+            0% {
+                background-color: #f7d245;
+                transform: rotate(0deg);
+                transform-origin: 50% bottom;
+            }
+
+            25% {
+                background-color: #f7d245;
+                transform: rotate(0deg);
+                transform-origin: 50% bottom;
+            }
+
+            75% {
+                background-color: #fff;
+                transform: rotate(-270deg);
+                transform-origin: 50% bottom;
+                z-index: 3;
+            }
+
+            100% {
+                background-color: #fff;
+                transform: rotate(-270deg);
+                transform-origin: 50% bottom;
+                z-index: 3;
+            }
+
+        }
+        /* 鹦鹉嘴巴 */
+        @keyframes cartoon3 {
+            0% {
+                transform: rotate(0deg);
+                transform-origin: left top;
+            }
+
+            25% {
+                background-color: #f7d245;
+                transform: rotate(0deg);
+                transform-origin: left top;
+            }
+
+            75% {
+                transform: rotate(90deg);
+                transform-origin: left top;
+            }
+
+            100% {
+                transform: rotate(90deg);
+                transform-origin: left top;
+            }
+        }
+        /* 鹦鹉眼睛 */
+        @keyframes cartoon4 {
+            0% {
+                transform: rotate(0deg);
+                transform-origin: 41px 41px;
+            }
+
+            25% {
+                transform: rotate(0deg);
+                transform-origin: 41px 41px;
+            }
+
+            75% {
+                transform: rotate(90deg);
+                transform-origin: 41px 41px;
+            }
+
+            100% {
+                transform: rotate(90deg);
+                transform-origin: 41px 41px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="zero">
+        <span class="fir"></span>
+        <span class="sec"></span>
+        <span class="thi"></span>
+        <span class="fou"></span>
+        <span class="point"></span>
+    </div>
+</body>
+
+</html>

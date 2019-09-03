@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            user-select: none;
+        }
+        table {
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        img {
+            width: 100px;
+            height: 130px;
+        }
+
+        button {
+            width: 35px;
+            height: 35px;
+            background-color: black;
+            color: #fff;
+            font-size: 30px;
+            line-height: 33px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        p {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <table width="750px" height="170px" border="1px solid" align="center" cellspacing="0" cellpadding="0">
+            <tr height="40px">
+                <td width="135px">图片</td>
+                <td width="135px">单价</td>
+                <td>数量</td>
+                <td width="135px">价格</td>
+            </tr>
+            <tr>
+                <td><img src="img/1.png"></td>
+                <td>20</td>
+                <td>
+                    <button>-</button>
+                    <p>0</p>
+                    <button>+</button>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var oBox = document.getElementById("box");
+        var aBtn = box.querySelectorAll("button");
+        var aP = box.querySelectorAll("p")
+        var num = +aP[0].innerHTML
+
+        aBtn[0].onclick = function () {
+            f1(true);
+        }
+        aBtn[1].onclick = function () {
+            f1(false);
+        }
+
+        function f1(bol) {
+            num = bol ? (num == 0 ? 0 : --num) : ++num;
+            aP[0].innerHTML = num;
+            aP[1].innerHTML = num * 20;
+        }
+    </script>
+</body>
+
+</html>

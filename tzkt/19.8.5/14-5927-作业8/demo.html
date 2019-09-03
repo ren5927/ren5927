@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        .main {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+
+        .choujiang {
+            width: 400px;
+            height: 100px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .choujiang>span {
+            display: inline-block;
+            width: 60px;
+            height: 25px;
+            background-color: aqua;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 25px;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+        }
+
+        #jieguo {
+            width: 400px;
+            height: 298px;
+            overflow: auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="choujiang">
+            <p>抽奖：2元抽一次</p>
+            <p>一等奖：10元</p>
+            <p>二等奖：5元</p>
+            <p>三等奖：2元</p>
+            <span>抽奖一次</span>
+        </div>
+        <hr width=99% color=red>
+        <div id="jieguo"></div>
+    </div>
+    <script>
+        var oSpan = document.querySelector("span");
+        var oDiv = document.getElementById("jieguo");
+        var num = 0;
+        var str = "";
+        var newStr = "";
+
+        oSpan.onclick = function () {
+            num = parseInt(Math.random() * 10);
+
+            if (num == 0) {
+                str = "一等奖";
+            } else if (0 < num && num <= 2) {
+                str = "二等奖";
+            } else if (2 < num && num <= 5) {
+                str = "三等奖";
+            } else {
+                str = "谢谢惠顾";
+            }
+            var text = "抽奖成功，你获得了:" + str;
+            var P = document.createElement("P");
+            P.innerText=text;
+            oDiv.insertBefore(P,oDiv.childNodes[0]);
+        }
+    </script>
+</body>
+
+</html>

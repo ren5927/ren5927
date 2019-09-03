@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            user-select: none;
+        }
+
+        textarea {
+            width: 600px;
+            height: 100px;
+            margin: 100px 0 20px 300px;
+            resize: none;
+            position: relative;
+            display: block;
+        }
+
+        button {
+            margin-left: 870px;
+        }
+
+        li {
+            width: 800px;
+            height: 30px;
+            margin-left: 270px;
+            list-style: none;
+        }
+
+        hr {
+            width: 640px;
+            border: 1px dotted;
+            margin-left: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1">
+        <textarea></textarea>
+        <button>提交</button>
+    </div>
+    <div id="box2">
+        <ul>
+
+        </ul>
+    </div>
+    <script>
+        var oBox1 = document.getElementById("box1");
+        var oBox2 = document.getElementById("box2");
+        var oBtn = oBox1.querySelector("button");
+        var oUl = oBox2.querySelector("ul")
+        var oText = oBox1.querySelector("textarea")
+
+        oBtn.onclick = function () {
+            if (oText.value.trim() !== "") {
+                oUl.innerHTML += "<li>" + oText.value.trim() + "</li><hr>"
+            }
+            oText.value = "";
+        }
+    </script>
+</body>
+
+</html>

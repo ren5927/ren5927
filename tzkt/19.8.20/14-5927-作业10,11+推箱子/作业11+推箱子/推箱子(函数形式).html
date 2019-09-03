@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        .btn {
+            width: 400px;
+            height: 35px;
+            margin: 100px auto 0;
+        }
+
+        button {
+            width: 80px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        #map {
+            /* width: 560px;
+            height: 560px; */
+            position: relative;
+            background: url(./img/block.gif);
+            margin: 0 auto;
+        }
+
+        #map>div {
+            width: 35px;
+            height: 35px;
+            position: absolute;
+        }
+
+        #map div img {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .ball {
+            margin: -3px 0 0 3px;
+        }
+
+        .person {
+            margin: -9px 0 0 -7px;
+        }
+
+        span {
+            display: block;
+            background-color: black;
+            height: 80px;
+            width: 80px;
+            color: #fff;
+            opacity: 0.5;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 80px;
+            z-index: 999;
+            position: fixed;
+        }
+
+        .left {
+            bottom: 20px;
+            left: 27%;
+        }
+
+        .up {
+            bottom: 105px;
+            left: 42%;
+        }
+
+        .right {
+            bottom: 20px;
+            left: 57%;
+        }
+
+        .down {
+            bottom: 20px;
+            left: 42%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btn">
+        <button>自动过关</button>
+        <button>上一步</button>
+        <button>上一关</button>
+        <button>下一关</button>
+    </div>
+    <div id="map"></div>
+    <div id="btn2">
+        <span class="left">左</span>
+        <span class="up">上</span>
+        <span class="right">右</span>
+        <span class="down">下</span>
+    </div>
+    <script>
+        var oMap = document.getElementById("map");
+        var aBtn = document.getElementsByTagName("button");
+        var aBtn2 = document.getElementsByTagName("span");
+        var len3 = aBtn2.length;
+        var btn2 = document.getElementById("btn2");
+
+        var size = {
+            x: 16,
+            y: 16
+        }
+        var level = 0;
+        var mapData = [
+            // 第一关的数据
+            [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 1, 1, 3, 0, 3, 2, 1, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 2, 0, 3, 4, 1, 1, 1, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 1, 1, 1, 3, 1, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            ],
+
+            // 第二关
+            [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 3, 3, 1, 0, 1, 1, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 3, 0, 1, 0, 1, 2, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 2, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            ],
+            // 第三个数据
+            [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 1, 0, 0, 3, 2, 2, 2, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 0, 3, 0, 1, 5, 2, 1, 0, 0, 0,
+                0, 0, 0, 1, 1, 0, 1, 1, 3, 1, 0, 1, 1, 0, 0, 0,
+                0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 3, 0, 1, 0, 0, 0,
+                0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 4, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            ],
+            // 第四个数据
+            [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 4, 1, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 2, 2, 2, 2, 1, 3, 0, 1, 1, 0, 0,
+                0, 0, 0, 0, 1, 2, 2, 2, 2, 1, 0, 3, 0, 1, 0, 0,
+                0, 0, 0, 0, 1, 2, 2, 2, 2, 0, 3, 0, 0, 1, 0, 0,
+                0, 0, 0, 0, 1, 0, 2, 2, 2, 1, 0, 0, 0, 1, 0, 0,
+                1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0,
+                1, 0, 3, 0, 3, 0, 0, 0, 3, 0, 0, 1, 0, 0, 1, 0,
+                1, 0, 0, 0, 0, 3, 3, 0, 0, 0, 3, 0, 3, 0, 1, 0,
+                1, 1, 1, 0, 3, 0, 3, 0, 3, 0, 0, 1, 1, 1, 1, 0,
+                0, 0, 1, 1, 0, 0, 0, 3, 0, 3, 0, 1, 0, 0, 0, 0,
+                0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+                0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            ],
+            [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 3, 0, 1, 0, 0, 0,
+                0, 0, 1, 1, 1, 1, 1, 0, 3, 1, 0, 0, 1, 0, 0, 0,
+                0, 1, 2, 2, 2, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0,
+                0, 1, 2, 0, 0, 1, 0, 0, 3, 0, 1, 0, 0, 1, 0, 0,
+                0, 1, 2, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 1, 0, 0,
+                0, 1, 2, 0, 0, 1, 0, 0, 3, 0, 1, 0, 0, 1, 0, 0,
+                0, 1, 2, 2, 2, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0,
+                0, 0, 1, 1, 1, 1, 1, 4, 3, 0, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            ]
+        ]
+        var auto = [
+            [40, 38, 37, 37, 39, 38, 38, 40, 39, 39],
+            [39, 39, 40, 40, 40, 40, 39, 40, 40, 37, 37, 38, 39, 40, 39, 38, 37, 38, 39, 39, 39, 40, 39, 38, 38, 38,
+                40, 37, 37, 37, 37, 38, 38, 38, 38, 37, 37, 40, 39, 38, 39, 40, 40, 40, 40, 39, 40, 40, 37, 37, 38,
+                39, 40, 39, 38, 37, 38, 39, 39, 39, 40, 39, 38, 37, 37, 37, 37, 38, 38, 38, 37, 37, 40, 39, 38, 39,
+                40, 40, 40, 39, 40, 40, 37, 37, 38, 39, 40, 39, 38, 37, 38, 39, 39, 39
+            ],
+            [38, 37, 38, 37, 37, 37, 39, 39, 39, 40, 39, 39, 38, 37, 38, 38, 38, 37, 37, 38, 37, 37, 40, 39, 39, 39,
+                39, 38, 39, 40, 37, 40, 40, 40, 40, 37, 37, 38, 38, 38, 40, 40, 37, 37, 40, 37, 37, 38, 39, 38, 38,
+                39, 38, 39, 39, 39, 39, 40, 40, 40, 40, 37, 37, 38, 39, 40, 39, 38, 38, 38, 38, 40, 40, 40, 37, 37,
+                38, 38, 38, 37, 37, 40, 39, 38, 39, 39, 39, 40, 40, 40, 37, 37, 38, 38, 37, 38, 40, 37, 37, 40, 40,
+                39, 39, 39, 40, 38, 39, 40, 39, 38, 38, 38, 40, 40, 37, 37, 38, 38, 37, 38, 39
+            ],
+            [],
+        ]
+        var stepNum = 0;
+        var step = {
+            person: [],
+            box: []
+        };
+
+        function init() {
+            oMap.style.cssText = "width:" + size.x * 35 + "px;height:" + size.y * 35 + "px;";
+            aBtn[2].onclick = f1;
+            aBtn[3].onclick = f2;
+            aBtn[1].onclick = f3;
+            aBtn[0].onclick = f4;
+            createMap(level);
+        }
+
+        function f4() {
+            createMap(level);
+            if (level == 3) {
+                alert("自己想");
+                return
+            }
+            var keyNum = 0
+            var oParent = document.getElementsByClassName("person")[0];
+            var oPerson = oParent.children[0];
+
+            var timer = setInterval(function () {
+                var keycode = auto[level][keyNum];
+                control2(keycode, oParent, oPerson);
+                keyNum++;
+            }, 500)
+            var time = 500 * auto[level].length;
+            setTimeout(function () {
+                clearInterval(timer);
+            }, time)
+        };
+
+        function f2() {
+            if (level >= mapData.length - 1) {
+                alert("这是最后一关了");
+            } else {
+                level++
+                createMap(level);
+            }
+        };
+
+        function f1() {
+            if (level <= 0) {
+                alert("这是第一关了");
+            } else {
+                level--;
+                createMap(level);
+            }
+        }
+
+        function createMap(lv) {
+            stepNum = 0;
+            oMap.innerHTML = "";
+            var oDiv, oImg, oPerson;
+            for (var i = 0; i < size.x * size.y; i++) {
+                switch (mapData[level][i]) {
+                    case 1:
+                        appDiv(i);
+                        oImg.src = "./img/wall.png";
+                        oDiv.classList.add("wall");
+                        break;
+                    case 2:
+                        appDiv(i);
+                        oDiv.classList.add("ball");
+                        oImg.src = "./img/ball.png";
+                        break;
+                    case 3:
+                        appDiv(i);
+                        oImg.src = "./img/box.png";
+                        oDiv.classList.add("box");
+
+                        break;
+                    case 4:
+                        appDiv(i);
+                        oDiv.classList.add("person");
+                        oImg.src = "./img/down.png";
+                        oPerson = oImg;
+                        break;
+                }
+            }
+
+            function appDiv(i) {
+                var x = i % size.x;
+                var y = parseInt(i / size.y);
+                oDiv = document.createElement("div");
+                oDiv.x = x;
+                oDiv.y = y;
+                oDiv.style.left = x * 35 + "px";
+                oDiv.style.top = y * 35 + "px";
+                oDiv.style.zIndex = (y * size.x);
+                oImg = new Image()
+
+
+                oDiv.appendChild(oImg);
+                oMap.appendChild(oDiv);
+
+            }
+            control(oPerson);
+        }
+
+        function control(oPerson) {
+
+            var oParent = oPerson.parentNode;
+
+            document.onkeydown = function (ev) {
+                ev = ev || window.event;
+                keycode = ev.keyCode;
+                control2(keycode, oParent, oPerson);
+            }
+        }
+
+        function control2(keycode, oParent, oPerson) {
+            step.person[stepNum] = {};
+            step.person[stepNum].src = oPerson.src;
+            step.person[stepNum].x = oParent.x;
+            step.person[stepNum].y = oParent.y;
+            
+            switch (keycode) {
+                case 37:
+                    oPerson.src = "./img/left.png";
+                    personRun({
+                        x: -1,
+                    }, oParent);
+                    break;
+                case 38:
+                    oPerson.src = "./img/up.png";
+                    personRun({
+                        y: -1,
+                    }, oParent);
+                    break;
+                case 39:
+                    oPerson.src = "./img/right.png";
+                    personRun({
+                        x: 1,
+                    }, oParent);
+                    break;
+                case 40:
+                    oPerson.src = "./img/down.png";
+                    personRun({
+                        y: 1,
+                    }, oParent);
+                    break;
+            }
+        }
+
+        function personRun(mJson, oParent) {
+            var aBox = document.getElementsByClassName("box");
+            mJson.x = mJson.x || 0;
+            mJson.y = mJson.y || 0;
+            var len = aBox.length;
+            var x = mJson.x;
+            var y = mJson.y;
+
+            if (mapData[level][(oParent.y + y) * size.x + oParent.x + x] !== 1) {
+
+
+                oParent.x += x;
+                oParent.y += y;
+                oParent.style.left = oParent.x * 35 + "px";
+                oParent.style.top = oParent.y * 35 + "px";
+                oParent.style.zIndex = oParent.x + oParent.y * size.x;
+                //步数+1
+                stepNum++;
+                //判断人物移动后是不是箱子
+                for (var j = 0; j < len; j++) {
+                    //如果是箱子
+                    if (aBox[j].x == oParent.x && aBox[j].y == oParent.y) {
+                        //判断箱子下一步是不是墙
+                        //如果不是,人已经移动,箱子移动
+                        if (mapData[level][aBox[j].x + x + (aBox[j].y + y) * size.x] !== 1) {
+
+                            //判断箱子后面是不是箱子
+                            //如果不是,移动箱子和人
+                            if (isBox((aBox[j].x + x), (aBox[j].y + y), aBox, aBox[j])) {
+
+                                step.box[stepNum - 1] = {};
+                                step.box[stepNum - 1].index = j;
+                                step.box[stepNum - 1].x=aBox[j].x;
+                                step.box[stepNum - 1].y=aBox[j].y;
+
+                                aBox[j].x += x;
+                                aBox[j].y += y;
+                                aBox[j].style.left = aBox[j].x * 35 + "px";
+                                aBox[j].style.top = aBox[j].y * 35 + "px";
+                                aBox[j].style.zIndex = aBox[j].y * size.x + aBox[j].x;
+                                isWin();
+                            }
+                            //如果是,将人拖回来
+                            else {
+                                oParent.x -= x;
+                                oParent.y -= y;
+                                oParent.style.left = oParent.x * 35 + "px";
+                                oParent.style.top = oParent.y * 35 + "px";
+                                oParent.style.zIndex = oParent.x + oParent.y * size.x;
+                                //回退
+                                stepNum--
+                                step.person.pop();
+                            }
+                        }
+                        //如果是,将移动的人拖回来 
+                        else {
+                            oParent.x -= x;
+                            oParent.y -= y;
+                            oParent.style.left = oParent.x * 35 + "px";
+                            oParent.style.top = oParent.y * 35 + "px";
+                            oParent.style.zIndex = oParent.x + oParent.y * size.x;
+                            //回退
+                            stepNum--
+                            step.person.pop();
+                        }
+                    }
+                }
+
+            }
+            console.log(step.box[stepNum - 1]);
+        }
+
+        function isBox(num1, num2, obj, obj2) {
+            var len = obj.length;
+            for (var i = 0; i < len; i++) {
+                if (obj2 !== obj[i]) {
+                    if (obj[i].x == num1 && obj[i].y == num2) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function isWin() {
+            // console.log(add1, add2);
+            var win = 0;
+            var aBall = document.getElementsByClassName("ball");
+            var aBox = document.getElementsByClassName("box");
+            var len = aBall.length;
+            var len2 = aBox.length;
+            for (var i = 0; i < len; i++) {
+                for (var j = 0; j < len2; j++) {
+                    if (aBall[i].x == aBox[j].x && aBall[i].y == aBox[j].y) {
+                        win++;
+                        break;
+                    }
+                }
+            }
+
+            if (win == aBall.length) {
+                if (level <= mapData.length - 2) {
+                    alert("通关");
+                    level++;
+                } else {
+                    alert("通全关");
+                    level = 0;
+                }
+
+                setTimeout(function () {
+                    createMap(level);
+                }, 30)
+            }
+        }
+
+        function f3() {
+            var oParent = document.getElementsByClassName("person")[0];
+            var oPerson = oParent.children[0];
+            var aBox = document.getElementsByClassName("box");
+            var nowBox
+            if (stepNum == 0) return;
+            oParent.x = step.person[stepNum - 1].x;
+            oParent.y = step.person[stepNum - 1].y;
+
+            oPerson.src = step.person[stepNum - 1].src;
+
+            oParent.style.left = oParent.x * 35 + "px";
+            oParent.style.top = oParent.y * 35 + "px";
+
+            oParent.style.zIndex = oParent.x + oParent.y * size.x;
+            if (step.box[stepNum - 1]) {
+                nowBox = aBox[step.box[stepNum - 1].index]
+                nowBox.x = step.box[stepNum - 1].x;
+                nowBox.y = step.box[stepNum - 1].y;
+
+                nowBox.style.left = nowBox.x * 35 + "px";
+                nowBox.style.top = nowBox.y * 35 + "px";
+                nowBox.style.zIndex = nowBox.y * size.x + nowBox.x;
+            }
+            console.log(step.box[stepNum - 1]);
+
+            stepNum--;
+
+        }
+
+
+        btn2.onclick = function (ev) {
+            var oParent = document.getElementsByClassName("person")[0];
+            var oPerson = oParent.children[0];
+            ev = ev || window.event;
+            var n = 0;
+            var cName = ev.target.className;
+            switch (cName) {
+                case "left":
+                    num = 37;
+                    break;
+                case "up":
+                    num = 38;
+                    break;
+                case "right":
+                    num = 39;
+                    break;
+                case "down":
+                    num = 40;
+                    break;
+            }
+            control2(num, oParent, oPerson);
+        }
+
+
+
+        init();
+    </script>
+</body>
+
+</html>

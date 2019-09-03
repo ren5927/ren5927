@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.
+        // function confirmEnding(str, str2) {
+        //     return str.substr(str.length - str2.length)== str2;
+        // }
+        // confirmEnding("He has to give me a new name", "me");
+
+        // 2.
+        //方法1
+        // var num = Number(prompt("输入一个数字"));
+
+        // function reverseNumber(num) {
+        //     for (var s = 0; num != 0; s = s * 10 + gw) {
+        //         var gw = num % 10;
+        //         num = parseInt(num / 10);
+        //     }
+        //     alert(s);
+        // }
+        // reverseNumber(num);
+
+        //方法2
+        // function reverseNumber(str) {
+        //     return Number((str+"").split("").reverse().join(""));
+        // }
+        // reverseNumber(123456);
+
+        // 3.
+        // function isPalindrome(str) {
+        //     return str.split("").reverse().join("") == str;
+        // }
+        // isPalindrome('madam');
+
+
+
+        // 4.
+        // function substrings(str) {
+        //     var len = str.length;
+        //     var newstr = "";
+        //     for (var i = 1; i <= len; i++) {
+        //         for (var j = 0; j < len; j++) {
+        //             if (j + i < len + 1) {
+        //                 newstr = newstr + str.substr(j, i) + ",";
+        //             }
+        //         }
+        //     }
+        //     var newstr1 = newstr.slice(0, newstr.length - 1);
+        //     var arr = newstr1.split(",")
+        //     return arr;
+        // }
+        // substrings('dog');
+
+        // 5.
+        // function reorderStr(str) {
+        //     return str.split("").sort().join("");
+        // }
+        // reorderStr('webmaster');
+
+        // 6.
+        // function myCap(str) {
+        //     var arr = str.split(" ");
+        //     var newstr = "";
+        //     for (var i = 0; i < arr.length; i++) {
+        //         newstr = newstr + arr[i].substr(0, 1).toUpperCase() + arr[i].slice(1) + " ";
+        //     }
+        //     return newstr;
+        // }
+        // myCap('the quick brown fox');
+
+        // 7.
+
+        // function findLongest(str) {
+        //     var arr = str.split(" ");
+        //     var len = arr.length;
+        //     var maxStr = "";
+        //     for (var i = 0; i < len; i++) {
+        //         if (arr[i].length > maxStr.length) {
+        //             maxStr = arr[i];
+        //         }
+        //     }
+        //     return maxStr;
+        // }
+
+        // findLongest('Web Development Tutorial');
+
+        // 8.
+        // function myUpperCase(str) {
+        //     var str = str || "";
+        //     var len = str.length;
+        //     var newstr = "";
+        //     var charCode = 0;
+        //     for (var i = 0; i < len; i++) {
+        //         if (str.charCodeAt(i) >= 97 && str.charCodeAt(i) <= 122) {
+        //             charCode = str.charCodeAt(i);
+        //             newstr += String.fromCharCode(charCode - 32);
+        //         } else {
+        //             newstr += str[i];
+        //         }
+        //     }
+        //     return newstr;
+        // }
+        // myUpperCase("hello");
+
+        // 9.
+        // function mySort(arr) {
+        //     var len=arr.length;
+        //     var num;
+        //     for(var i=0;i<len;i++){
+        //         for(var j=0;j<len-i;j++){
+        //             if(arr[j]>arr[j+1]){
+        //                 num=arr[j];
+        //                 arr[j]=arr[j+1];
+        //                 arr[j+1]=num;
+        //             }
+        //         }
+        //     }
+        //     return arr;
+        // }
+        // mySort([2, 33, 41, 10, 5]);
+
+        // 10.
+        // function repeat(str,num){
+        //     var newstr="";
+        //     if(num<=0){
+        //         return str;
+        //     }else{
+        //         for(i=1;i<=num;i++){
+        //             newstr+=str;
+        //         }
+        //     }
+        //     return newstr;
+        // }
+        // repeat("abc", 2);
+
+        // 11.
+        // function bouncer(arr) {
+        //     var newarr=[];
+        //     var len =arr.length;
+        //     for(var i=len-1;i>=0;i--){
+        //         if(arr[i]){
+        //             newarr.push(arr[i]);
+        //         }
+        //     }
+        //     return newarr;
+        // }
+        // bouncer([7, "ate", "", false, 9]);
+
+        // 12.
+        // function compare(arr){
+        //     var len1=arr[1].length;
+        //     for(var i=0;i<len1;i++){
+        //         if(arr[0].indexOf(arr[1][i])==-1){
+        //             return false;
+        //         }
+        //     }
+        //     return true;
+        // }
+        // compare(["hello", "heo"]);
+
+        // 13.
+        //不考虑重复
+        // function replaceStr() {
+        //     return this.replace(arguments[0], arguments[1]);
+        // }
+        // replaceStr.call('l am wuwei', 'wuwei', 'sixsixsixx');
+
+        //考虑重复
+        // function replaceStr(str1, str2, str3) {
+        //     if (str1.indexOf(str2) == -1) {
+        //         return str1;
+        //     } else {
+        //         return replaceStr((str1.replace(str2, str3)), str2, str3)
+        //     }
+        // }
+        // replaceStr('l am wuwei', 'wuwei', 'sixsixsixx');
+
+        // 14.
+        // function myPush() {
+        //     var len = arguments.length;
+        //     for (var i = 0; i < len; i++) {
+        //         this[this.length] = arguments[i];
+        //     }
+        //     return this.length;
+        // }
+        // var arr = [1, 2, 4];
+        // myPush.call(arr, "hello");
+
+        // 15.
+        // function returnArr(str) {
+        //     var newarr = [];
+        //     var num1 = 0;
+        //     num2 = 0;
+        //     var len = str.length;
+        //     var a, b;
+        //     ww:for (var i = 0; i < len; i++) {
+        //         num1 = str.charCodeAt(i);
+        //         if (num1 >= 48 && num1 <= 57) {
+        //             a = i;
+        //             for(var j=i;j<len;j++){
+        //                 num2=str.charCodeAt(j);
+        //                 if(!(num2>=48&&num2<=57)){
+        //                     b=j;
+        //                     newarr.push(str.slice(a,b));
+        //                     i=j;
+        //                     continue ww;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     return newarr;
+        // }
+        // var arr='shdkfh1234cxj5665sdkj2121';
+        // returnArr(arr+"a");
+
+        // 16.
+
+        // function unquie(str) {
+        //     var len = str.length;
+        //     for (var i = 0; i < len; i++) {
+        //         if (str.indexOf(str[i]) == str.lastIndexOf(str[i])) {
+        //             return str[i];
+        //         }
+        //     }
+        // }
+        // unquie("wuwei");
+
+
+        // // 17.
+        //方法1
+        // function deweightStr(str) {
+        //     var len = str.length;
+        //     var newstr = "";
+        //     for (var i = 0; i < len; i++) {
+        //         if (newstr.indexOf(str[i]) == -1) {
+        //             newstr += str[i];
+        //         }
+        //     }
+        //     return newstr;
+        // }
+        // deweightStr("wuweiwu");
+
+        //方法2
+        // function deweightStr(str) {
+        //     var obj={};
+        //     var len=str.length;
+        //     for(var i=0;i<len;i++){
+        //         obj[str[i]]=str[i];
+        //     }
+        //     var newstr="";
+        //     for(var key in obj){
+        //         newstr+=key;
+        //     }
+        //     return newstr;
+        // }
+        // deweightStr("wuweiwu");
+
+        // 18.
+        // function deweightArr(arr) {
+        //     var str=arr.join("");
+        //     var len = str.length;
+        //     var newstr = "";
+        //     for (var i = 0; i < len; i++) {
+        //         if (newstr.indexOf(str[i]) == -1) {
+        //             newstr += str[i];
+        //         }
+        //     }
+        //     return newstr.split("");
+        // }
+        // deweightArr([1, 4, 6, 3, 4, 6, 2]);
+
+        // 19.
+        // var str = prompt("请输入一个字符串");
+        // var arr = str.split("");
+
+        // function strLen(str) {
+        //     var len = arr.length;
+        //     var len2 = 0;
+        //     for (var i = 0; i < len; i++) {
+        //         if (arr[i].charCodeAt() > 255) {
+        //             len2 += 2;
+        //         } else if (arr[i].charCodeAt() <= 255) {
+        //             len2++;
+        //         }
+        //     }
+        //     alert(len2);
+        // }
+        // strLen(str);
+
+        // 20.
+        // function getUrl(url) {
+        //     var arr = url ? url.split("?") : [];
+        //     var obj = {};
+        //     var arr2 = arr[1] ? arr[1].split("&") : [];
+        //     var len = arr2.length;
+        //     for (var i = 0; i < len; i++) {
+        //         obj[arr2[i].split("=")[0]] = arr2[i].split("=")[1];
+        //     }
+        //     console.log(obj);
+        //     return obj;
+        // }
+        // var url = 
+        // "https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=1&tn=baidu&wd=wuwwei&rsv_pq=becd1331000082fd&rsv_t=0f84&rqlang=cn&rsv_enter=1&rsv_sug3=14&rsv_sug1=12&rsv_sug7=100&rsv_sug2=0&rsp=0&inputT=9344&rsv_sug4=3518432";
+        // getUrl(url)['wd'];
+    </script>
+</body>
+
+</html>

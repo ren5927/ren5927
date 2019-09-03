@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0%;
+            user-select: none;
+        }
+
+        .box {
+            width: 1000px;
+            height: 70px;
+            position: relative;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        span {
+            display: block;
+            width: 50px;
+            height: 70px;
+            background-color: #323232;
+            border-radius: 10px;
+            color: #f2f2f2;
+            text-align: center;
+            line-height: 70px;
+            font-size: 40px;
+            font-weight: bolder;
+            margin: 0 5px;
+        }
+
+        #box1,
+        #box2,
+        #box3 {
+            position: relative;
+        }
+
+        .shi1,
+        .shi2,
+        .fen1,
+        .fen2,
+        .miao1,
+        .miao2 {
+            width: 80px;
+            height: 140px;
+            position: absolute;
+            top: 0;
+        }
+
+        .shi1 {
+            left: 0;
+        }
+
+        .shi2 {
+            left: 60px;
+        }
+
+        .fen1 {
+            left: 130px;
+        }
+
+        .fen2 {
+            left: 190px;
+        }
+
+        .miao1 {
+            left: 260px;
+        }
+
+        .miao2 {
+            left: 320px;
+        }
+
+        .p1,
+        .p2 {
+            line-height: 70px;
+            color: #323232;
+            font-size: 40px;
+            position: absolute;
+            top: 0;
+            font-weight: bolder;
+        }
+
+        .p1 {
+            left: 115px;
+        }
+
+        .p2 {
+            left: 245px;
+        }
+
+        .tran {
+            margin-top: -70px;
+            transition: margin-top .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="box1">
+            <p class="shi1">
+                <span class="fir"></span>
+                <span class="sec"></span>
+            </p>
+            <p class="shi2">
+                <span class="fir"></span>
+                <span class="sec"></span>
+            </p>
+        </div>
+
+        <div class="p1">
+            <pre>:</pre>
+        </div>
+
+        <div id="box2">
+            <p class="fen1">
+                <span class="fir"></span>
+                <span class="sec"></span>
+            </p>
+            <p class="fen2">
+                <span class="fir"></span>
+                <span class="sec"></span>
+            </p>
+        </div>
+
+        <div class="p2">
+            <pre>:</pre>
+        </div>
+
+        <div id="box3">
+            <p class="miao1">
+                <span class="fir"></span>
+                <span class="sec"></span>
+            </p>
+            <p class="miao2">
+                <span class="fir"></span>
+                <span class="sec"></span>
+            </p>
+        </div>
+    </div>
+    <script>
+        var aSpan = document.getElementsByClassName("fir");
+        var aSpan2 = document.getElementsByClassName("sec");
+        var aP = document.getElementsByTagName("p");
+
+
+        function getArr() {
+            var date = new Date();
+            var shi = date.getHours();
+            var fen = date.getMinutes();
+            var miao = date.getSeconds();
+            shi = f2(shi);
+            fen = f2(fen);
+            miao = f2(miao);
+            var arr = [shi[0], shi[1], fen[0], fen[1], miao[0], miao[1]];
+            var len = arr.length;
+            return arr
+        }
+
+        function f2(n) {
+            return n < 10 ? "0" + n : "" + n;
+        }
+
+
+
+        function f1() {
+            var dateArr = getArr();
+
+            var lastArr = dateArr;
+            var length = dateArr.length;
+            for (var j = 0; j < length; j++) {
+                aSpan[j].innerHTML = dateArr[j];
+            }
+            return function () {
+                dateArr = getArr();
+                
+                for (var i = 0; i < length; i++) {
+                    if (dateArr[i] == lastArr[i])  continue;
+                    aSpan2[i].innerHTML = dateArr[i];
+                    aP[i].classList.add("tran");
+                    setTimeout(function (i) {
+                        aSpan[i].innerHTML = dateArr[i];
+                        aP[i].classList.remove("tran");
+                    }, 500, i)
+                }
+                lastArr = dateArr;
+            }
+        }
+        setInterval(f1(), 1000);
+    </script>
+</body>
+
+</html>

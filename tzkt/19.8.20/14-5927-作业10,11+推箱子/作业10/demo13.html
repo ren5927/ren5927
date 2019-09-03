@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+            user-select: none;
+        }
+
+        div {
+            width: 178px;
+            height: 100px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        /* ul {
+            width: 178px;
+            height: 100px;
+        } */
+
+        li {
+            list-style: none;
+            width: 178px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        img {
+            width: 178px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><img src="./img/sh1.jpg"></li>
+            <li><img src="./img/sh2.jpg"></li>
+            <li><img src="./img/sh3.jpg"></li>
+            <li><img src="./img/sh4.jpg"></li>
+            <li><img src="./img/sh5.jpg"></li>
+        </ul>
+    </div>
+    <script>
+        var aLi = document.querySelectorAll("li");
+        var oBox = document.querySelector("div");
+        var winW, winH, w, h, leftMax, topMax;
+        var len = aLi.length;
+        var index = 0;
+
+        function f1() {
+            winW = getView().wid;
+            winH = getView().hei;
+            w = oBox.clientWidth;
+            h = oBox.clientHeight;
+
+            leftMax = (winW - w) / 2;
+            topMax = (winH - h) / 2;
+        }
+        f1();
+        window.onresize = f1;
+
+        document.onmousedown = function (ev) {
+            ev = ev || window.ev;
+            var parent = ev.target.parentNode;
+            if (parent.nodeName == "LI") {
+                var starLeft = ev.clientX
+                var starTop = ev.clientY;
+                var x = parent.offsetLeft;
+                var y = parent.offsetTop;
+                ev.preventDefault();
+                var This = parent;
+                parent.style.zIndex = ++index;
+                document.onmousemove = function (ev) {
+                    ev = ev || window.ev;
+                    var newLeft = ev.pageX;
+                    var newTop = ev.pageY;
+                    var _x = newLeft - starLeft + x;
+                    var _y = newTop - starTop + y;
+
+                    console.log(leftMax, topMax);
+                    _x = Math.min(_x, leftMax);
+                    _x = Math.max(_x, -leftMax);
+                    _y = Math.min(_y, topMax);
+                    _y = Math.max(_y, -topMax);
+                    console.log(_x, _y);
+
+                    This.style.left = _x + 'px';
+                    This.style.top = _y + 'px';
+                }
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            }
+        }
+
+        function getView() {
+            if (window.innerWidth) {
+                return {
+                    wid: innerWidth,
+                    hei: innerHeight
+                }
+            } else if (document.compatMode == CSS1compat) {
+                return {
+                    wid: document.documentElement.clientWidth,
+                    hei: document.documentElement.clientHeight
+                }
+            } else {
+                return {
+                    wid: document.body.clientWidth,
+                    hei: document.body.clientHeight
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

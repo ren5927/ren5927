@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        span {
+            display: inline-block;
+            width: 200px;
+            height: 40px;
+            background-color: #000;
+            margin: 2px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+    <script>
+        var oDiv = document.querySelector("div");
+        console.log(oDiv);
+
+        function f1() {
+            var num1, num2, num3;
+            num1 = parseInt(Math.random() * 256);
+            num2 = parseInt(Math.random() * 256);
+            num3 = parseInt(Math.random() * 256);
+            oDiv.innerHTML += '<span style="background-color: rgb(' + num1 + ',' + num2 + ',' + num3 + ')">' + "rgb(" +
+                num1 + ',' + num2 + ',' + num3 + ")</span>";
+            console.log(num1)
+            console.log(num2)
+            console.log(num3)
+        }
+        setInterval(f1, 1000);
+    </script>
+</body>
+
+</html>

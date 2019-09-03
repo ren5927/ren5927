@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            overflow: hidden;
+            background: url("./img/bg.png");
+            background-size: cover;
+        }
+
+        .shuju {
+            position: fixed;
+            left: 30px;
+            top: 50px;
+            color: #fff;
+            font-size: 60px;
+            font-weight: bolder;
+        }
+
+        #qiqiu div {
+            width: 81px;
+            height: 119px;
+            background: url(./img/1.png) no-repeat;
+            /* background-position: 0px 0px; */
+            overflow: hidden;
+            position: fixed;
+            top: 600px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shuju">
+        <p class="defen">0</p>
+        <p class="time">50</p>
+        <audio src="music/c.wav" id="yinyue"></audio>
+        <audio src="music/bg.wav" autoplay id="bg" loop></audio>
+    </div>
+    <div id="qiqiu"></div>
+    <script>
+        bg.play();
+        var oBox = document.getElementById("qiqiu");
+        var oTime = document.getElementsByClassName("time");
+        var oDefen = document.getElementsByClassName("defen");
+        var gameTime = 50;
+        var defen = 0;
+
+        function Person() {
+            this.dom = document.createElement("div");
+            this.index = 600;
+            this.fly();
+            this.init();
+            var self = this;
+            this.dom.onclick = function () {
+                self.boom()
+                yinyue.play();
+                defen += self.sorce;
+                oDefen[0].innerHTML = defen;
+            }
+        }
+        Person.prototype.init = function () {
+           
+            this.sorce = parseInt(Math.random() * 7) + 1;
+            this.dom.style.left = Math.random() * (innerWidth - 81) + "px";
+            var x = -(this.sorce - 1) % 4 * 96;
+            var y = -parseInt((this.sorce - 1) / 4) * 120;
+            this.dom.style.backgroundPosition = x + "px " + y + "px";
+            oBox.appendChild(this.dom);
+        }
+        Person.prototype.fly = function () {
+            var self = this;
+            self.timer = setInterval(function () {
+                self.index = self.index - self.sorce;
+                if (self.index < -100) {
+                    self.boom();
+                }
+                self.dom.style.top = self.index + "px";
+            }, 20);
+        }
+        Person.prototype.boom = function () {
+            clearInterval(this.timer);
+            oBox.removeChild(this.dom);
+        }
+
+
+        var time = setInterval(function () {
+            new Person;
+        }, 500)
+
+        var time2 = setInterval(function () {
+            gameTime--;
+            if (gameTime == 0) {
+                clearInterval(time);
+                clearInterval(time2);
+                alert("游戏结束你的得分是" + defen);
+            }
+            oTime[0].innerHTML = gameTime;
+        }, 1000)
+    </script>
+</body>
+
+</html>

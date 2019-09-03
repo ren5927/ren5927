@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: url('images/1.jpg');
+      background-size: cover;
+    }
+
+    #box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -309px 0 0 -504px;
+      width: 1008px;
+      height: 618px;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 20px #25d9d3;
+    }
+
+    #box #in {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    #in div {
+      position: absolute;
+      bottom: 0;
+      width: 12px;
+      height: 0;
+      /* background: #25d9d3; */
+      transition: .5s;
+      margin-left: 3px;
+      border-radius: 5px 5px 0 0;
+    }
+
+    /* .p1 {
+      left: 0;
+    }
+
+    .p2 {
+      left: 18px;
+    } */
+
+    audio {
+      position: fixed;
+      top: 15px;
+      left: 37%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <div id="in">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <audio src="./music/海浪.mp3" controls> </audio>
+
+  <script>
+    var aDiv = document.querySelectorAll("#in div");
+    var oAud = document.querySelector("audio");
+    var len = aDiv.length;
+    var mark = false;
+
+
+    for (var i = 0; i < len; i++) {
+      aDiv[i].style.left = i * 18 + "px";
+    }
+    //改变颜色
+    function f1() {
+      for (var j = 0; j < len; j++) {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        aDiv[j].style.backgroundColor = "rgba(" + r + "," + g + "," + b + ")";
+
+      }
+    }
+    //改变高度
+    function f2() {
+      for (var j = 0; j < len; j++) {
+        var h = Math.floor(Math.random() * 501);
+        aDiv[j].style.height = h + "px";
+      }
+    }
+    oAud.onmouseenter = function () {
+      if (mark) return;
+      var time1 = setInterval(f1, 600);
+      var time2 = setInterval(f2, 150);
+      mark=true;
+    }
+  </script>
+</body>
+
+</html>

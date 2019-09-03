@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        img {
+            width: 50px;
+            height: 65px;
+        }
+
+        table {
+            margin: 100px auto 0 auto;
+            text-align: center;
+            border: 1px solid pink;
+        }
+
+        span {
+            width: 35px;
+            height: 35px;
+            background-color: honeydew;
+            color: #000;
+            font-size: 30px;
+            line-height: 33px;
+            display: inline-block;
+            cursor: pointer;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+
+        td>p {
+            width: 50px;
+            height: 35px;
+            display: inline-block;
+        }
+
+        .t1 {
+            background-color: palevioletred;
+            font-weight: bold;
+            font-size: 13px;
+            color: #fff;
+        }
+
+        #box2 {
+            width: 750px;
+            height: 40px;
+            background-color: palevioletred;
+            margin: 20px auto;
+        }
+
+        #box2>pre {
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <table width="750px" height="170px" border="1px solid" align="center" cellspacing="0" cellpadding="0">
+            <tr height="40px" class="t1">
+                <td width="135px">图片</td>
+                <td width="135px">单价</td>
+                <td>数量</td>
+                <td width="135px">价格</td>
+            </tr>
+            <tr>
+                <td><img src="img/1.png"></td>
+                <td>10</td>
+                <td>
+                    <span>-</span>
+                    <p>0</p>
+                    <span>+</span>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+            </tr>
+            <tr>
+                <td><img src="img/1.png"></td>
+                <td>20</td>
+                <td>
+                    <span>-</span>
+                    <p>0</p>
+                    <span>+</span>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+            </tr>
+            <tr>
+                <td><img src="img/1.png"></td>
+                <td>30</td>
+                <td>
+                    <span>-</span>
+                    <p>0</p>
+                    <span>+</span>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+            </tr>
+            <tr>
+                <td><img src="img/1.png"></td>
+                <td>40</td>
+                <td>
+                    <span>-</span>
+                    <p>0</p>
+                    <span>+</span>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="box2">
+        <pre>已选中商品： 0 个</pre>
+        <pre>合计费用： ￥0</pre>
+    </div>
+    <script>
+        var aSpan = document.querySelectorAll("span");
+        var aP = document.querySelectorAll("p")
+        var aPre = document.querySelectorAll("#box2>pre");
+        var len = aSpan.length;
+        var numArr = [0, 0, 0, 0];
+        var djArr = [10, 20, 30, 40];
+        var num = 0,
+            price = 0;
+
+        for (i = 0; i < len; i += 2) {
+            aSpan[i].index = i;
+            aSpan[i].onclick = function () {
+                f1(true, this);
+            }
+        }
+        for (i = 1; i < len; i += 2) {
+            aSpan[i].index = i;
+            aSpan[i].onclick = function () {
+                f1(false, this);
+            }
+        }
+
+
+        function f1(bol, This) {
+            if (bol) {
+                if (aP[This.index].innerHTML == 0) return;
+                aP[This.index].innerHTML = --numArr[parseInt(This.index / 2)];
+                aP[This.index + 1].innerHTML = aP[This.index].innerHTML * djArr[parseInt(This.index / 2)];
+            } else {
+                aP[This.index - 1].innerHTML = ++numArr[parseInt(This.index / 2)];
+                aP[This.index].innerHTML = aP[This.index - 1].innerHTML * djArr[parseInt(This.index / 2)];
+            }
+            num = numArr[0] + numArr[1] + numArr[2] + numArr[3];
+            price = numArr[0] * 10 + numArr[1] * 20 + numArr[2] * 30 + numArr[3] * 40;
+            aPre[0].innerHTML = "已选中商品： " + num + " 个";
+            aPre[1].innerHTML = "合计费用： ￥" + price;
+        }
+    </script>
+</body>
+
+</html>

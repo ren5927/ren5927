@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.
+        // var num = Number(prompt("请输入一个数字"));
+        // if (num % 5 == 0 && num % 6 == 0) {
+        //     alert("这个数字既能能被5整除,也能被6整除");
+        // } else if (num % 5 == 0) {
+        //     alert("这个数字能被5整除,但是不能被6整除");
+        // } else if (num % 6 == 0) {
+        //     alert("弹出这个数字能被6整除,但是不能被5整除");
+        // } else {
+        //     alert("这个数字既不能能被5整除,也不能被6整除");
+        // }
+
+        // // 2.
+        // var num1 = Number(prompt("请输入第一个数字"));
+        // var num2 = Number(prompt("请输入第二个数字"));
+        // if (num1 % 2 === num2 % 2) {
+        //     alert("你好,这两个数字奇偶性相同");
+        // } else {
+        //     alert("你好,这两个数字奇偶性不同");
+        // }
+
+        // 3.
+        // var age = Number(prompt("请输入工作了几年"));
+        // var money = Number(prompt("请输入月薪"));
+        // if (age < 0) {
+        //     money=0;
+        //     alert("捣乱的请滚蛋");
+        // }
+        // if (age === 0) {
+        //     if (money > 8000) {
+        //         money *= 1.2;
+        //     }
+        // } else if (age === 1) {
+        //     if (money > 10000) {
+        //         money *= 1.7;
+        //     } else {
+        //         money *= 1.5;
+        //     }
+        // } else if (age >= 2) {
+        //     if (money > 12000) {
+        //         money *= 3.2;
+        //     } else {
+        //         money *= 3;
+        //     }
+        // }
+        // alert("您的年终奖是"+money);
+
+        //4.
+        // var n = Number(prompt("请输入一个正整数"));
+        // var j=0;
+        // if (n <= 0) {
+        //     alert("输入错误");
+        // } else {
+        //     for (var i = 1; i <= n; i++) {
+        //           j =j+ i;
+        //     }
+        //     alert(j);
+        // }
+
+        // 5.
+        // var n = Number(prompt("请输入一个大于1的正整数"));
+        // var j=0,s=0;
+        // if (i < 2) {
+        //     alert("输入错误");
+        // } else {
+        //     for (var i = 2; i <= n; i++) {
+        //         j = (i+1)/i;
+        //         s+=j;
+        //     }
+        //     alert(s);
+        // }
+
+        // 6.
+        // var n = Number(prompt("请输入一个正整数"));
+        // if(n<1){
+        //     alert("输入错误");
+        // }else{
+        //     for(var i = 1; i <= n; i++){
+        //         if(n%i==0){
+        //             console.log(i);
+        //         }
+        //     }
+        // }
+
+        // 7.
+        // for (var i = 1; i <= 1000; i++) {
+        //     if (i % 5 == 0 || i % 6 == 0) {
+        //         console.log(i);
+        //     }
+        // }
+
+        // 8.
+        // for (var i = 1; i <= 60; i++) {
+        //     if (i % 7 !== 0 && i % 10 !== 7) {
+        //         console.log(i);
+        //     } 
+        // }
+
+        // 9.
+        // for (var i = 100; i <= 999; i++) {
+        //     var g = i % 10; //个位数
+        //     var s = ((i - g) / 10) % 10; //十位数
+        //     var b = (i - g - s * 10) / 100; //百位数
+        //     if (Math.pow(g, 3) + Math.pow(s, 3) + Math.pow(b, 3) === i) {
+        //         console.log(i);
+        //     }
+        // }
+
+        // 10.
+
+        // for (var i = 1; i <= 10000; i++) { //1 2 3 4 5 6 7 8 9 10
+        //     var s = 0;
+        //     for (var j = 1; j <= i; j++) {
+        //         if (i % j === 0) {
+        //             s = s + j;
+        //             if (s ==  2*i) {
+        //                 console.log(i);
+        //             }
+        //         }
+        //     }
+        // }
+
+        // 11. 
+        // for (var x = 0; x <= 100; x++) {
+        //     for (var y = 0; y <= 100; y++) {
+        //         for (var z = 0; z <= 100; z++) {
+        //             if (3 * x + 2 * y + z == 200 && x + y + z == 100) {
+        //                 console.log(x, y, z);
+        //             }
+        //         }
+        //     }
+        // }
+        // 12.
+        // var n = Number(prompt("请输入一个大于1的正整数"));
+        // var s=0;
+        // for (var i = 1; i <= n; i++) {//7 6
+        //     if(n%i==0){  
+        //         s=s+i;
+        //     }
+        // }
+        // if(s==n+1){
+        //     alert("是质数");
+        // }else{
+        //     alert("不是质数")   
+        // }
+    </script>
+</body>
+
+</html>

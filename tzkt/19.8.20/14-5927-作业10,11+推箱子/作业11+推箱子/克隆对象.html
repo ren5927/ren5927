@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            name: "nihao",
+            age: 18,
+            a: [44, 55],
+            o: {
+                n: 0,
+                m: 666,
+            },
+            ff: null
+        }
+        var toStr = Object.prototype.toString;
+        var cloneobj = {};
+
+        function fn(obj, obj2) {
+            for (key in obj) {
+                // console.log(typeof obj[key])
+                if (typeof obj[key] == "object") {
+                    if (toStr.call(obj[key]) == "[object Array]") {
+                        obj2[key] = [];
+                    }
+                    if (toStr.call(obj[key]) == "[object Object]") {
+                        obj2[key] = {};
+                    } else {
+                        obj2[key] = obj[key];
+                    }
+                    fn(obj[key], obj2[key]);
+                } else {
+                    obj2[key] = obj[key];
+                }
+            }
+            return obj2;
+        }
+        fn(obj, cloneobj);
+    </script>
+</body>
+
+</html>

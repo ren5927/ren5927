@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 50px;
+            height: 65px;
+            overflow: hidden;
+            background: url(./img/2.png) no-repeat;
+            background-size: cover;
+            position: fixed;
+            left: 0px;
+            /* left: -50px; */
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function Person() {
+            this.left = 0;
+            this.buzi = 0;
+            this.init();
+            this.zou();
+        }
+        Person.prototype.init = function () {
+            this.dom = document.createElement("div");
+            this.dom.style.top = Math.random() * (innerHeight - 65) + "px";
+            document.body.appendChild(this.dom);
+        }
+        Person.prototype.zou = function () {
+            var self = this;
+
+
+            this.index = setInterval(function () {
+                self.left += 1;
+                self.buzi++;
+                self.buzi %= 4;
+                if (self.left > innerWidth) {
+                    self.kill();
+                }
+                self.dom.style.left = self.left + "px";
+                self.dom.style.backgroundPositionX = self.buzi * -50 + "px";
+            }, 5)
+        }
+        Person.prototype.kill = function () {
+            clearInterval(this.index);
+            document.body.removeChild(this.dom);
+        }
+        var time = setInterval(function () {
+            new Person()
+        }, 500)
+
+        // self.dom.style.backgroundPositionX=x+"px";
+    </script>
+</body>
+
+</html>

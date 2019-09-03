@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  第一大题
+        console.log(15); //15
+        console.log(017); //15 1*8+7
+        console.log(0xf); //15
+        console.log(parseInt(3, 8)); //3 8进制3
+        console.log(parseInt(3, 2)) //NaN 2进制无3 NaN
+        console.log(parseInt(3, 0)); //3 默认10进制
+        console.log(typeof typeof 'wuwei'); //string
+        console.log(typeof typeof null); //string
+
+        //第二大题
+        // 1. 
+        console.log("D");
+
+        // 2.
+        var a = (123 + 45 * 78) / (34 + 543) - 9 * (324 - 34);
+        console.log(a); //-2603.7036395147315
+
+        // 3.
+        var Centigrade = Number(prompt("输入摄氏度"));
+        FahrenheitDegree = 9 / 5 * Centigrade + 32;
+        alert("华氏温度是" + FahrenheitDegree);
+
+        // 4.
+        var a = Math.pow(5, 7);
+        var b = (23 + a) / 45,
+            c = b * b;
+        alert("答案是" + c);
+
+        var s=Math.pow((23+Math.pow(5,7))/45,2)
+        console.log(s);
+        // 5.
+        var length = prompt("请输入六边形边长");
+        var a, area;
+        a = Math.sqrt(3);
+        area = (3 * a) / 2 * Math.pow(length, 2);
+        alert(area);
+
+        // 6.
+        var num = Number(prompt("输入一个三位数"));
+        digits = num % 10; //个位数
+        ten = ((num - digits) / 10) % 10; //十位数
+        hundred = (num - digits - ten * 10) / 100; //百位数
+        var sum = digits + ten + hundred;
+        alert("您输入的三位数各个位数的和是" + sum);
+
+        // 7.
+        var today = 2;
+        var day1 = (2 + 1000) % 7;
+        alert("今天星期2,1000天后是星期" + day1);
+        var userDefinedDay = Number(prompt("今天周二,请输入一个天数,查看天数后是星期几"));
+        var day2 = (2 + userDefinedDay) % 7;
+        alert("今天星期2," + userDefinedDay + "天后是星期" + day2);
+    </script>
+</body>
+
+</html>

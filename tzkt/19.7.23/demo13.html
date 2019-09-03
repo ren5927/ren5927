@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 230px;
+            height: 100px;
+            margin: 50px auto;
+        }
+
+        button {
+            width: 60px;
+            height: 25px;
+            background-color: #000;
+            display: inline-block;
+            color: aliceblue;
+        }
+
+        input {
+            width: 150px;
+            height: 20px;
+            display: none;
+        }
+        p{
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>点击修改</p>
+        <input type="text" value="点击修改">
+        <button>修改</button>
+    </div>
+    <script>
+        var oBtn = document.getElementsByTagName("button");
+        var oText = document.getElementsByTagName("input");
+        var oP=document.getElementsByTagName("p");
+        var mark = true;
+
+        oBtn[0].onclick = function () {
+           f1();
+        }
+        function f1(){
+            oBtn[0].innerHTML = mark ? "确定" : "修改";
+            oText[0].style.display=mark ? "inline-block":"none";
+            oP[0].style.display=mark? "none": "inline-block";
+            oP[0].innerHTML=oText[0].value;
+            mark = !mark;    
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box {
+            width: 100%;
+            height: 45%;
+        }
+
+        .box1 {
+            width: 100%;
+            height: 100%;
+        }
+
+        .main {
+            width: 100%;
+            height: 100%;
+        }
+
+        .main li {
+            list-style: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main li img {
+            width: 100%;
+            height: 500px;
+            z-index: -1;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .xiaoshi {
+            visibility: hidden;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .box2 {
+            width: 100%;
+            height: 70px;
+            position: fixed;
+            top: 420px;
+            z-index: 999;
+        }
+
+        .list li img {
+            width: 11%;
+            height: 68px;
+            float: left;
+            margin-left: 2%;
+            cursor: pointer;
+        }
+
+        .Wr {
+            border: 2px solid #fff;
+        }
+
+        .Or {
+            border: 2px solid orange;
+        }
+
+        #box>img {
+            width: 120px;
+            height: 100px;
+            z-index: 999;
+            position: fixed;
+            top: 30%;
+            left: 44%;
+            cursor: pointer;
+            visibility: hidden;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img src="./img/购买.png">
+        <div class="box1">
+            <ul class="main">
+                <li><img src="./img/1.jpg"></li>
+                <li class="xiaoshi"><img src="./img/2.jpg"></li>
+                <li class="xiaoshi"><img src="./img/3.jpg"></li>
+                <li class="xiaoshi"><img src="./img/4.jpg"></li>
+                <li class="xiaoshi"><img src="./img/5.jpg"></li>
+                <li class="xiaoshi"><img src="./img/6.jpg"></li>
+                <li class="xiaoshi"><img src="./img/7.jpg"></li>
+            </ul>
+        </div>
+        <div class="box2">
+            <ul class="list">
+                <li><img src="./img/1.jpg" class="Or"></li>
+                <li><img src="./img/2.jpg" class="Wr"></li>
+                <li><img src="./img/3.jpg" class="Wr"></li>
+                <li><img src="./img/4.jpg" class="Wr"></li>
+                <li><img src="./img/5.jpg" class="Wr"></li>
+                <li><img src="./img/6.jpg" class="Wr"></li>
+                <li><img src="./img/7.jpg" class="Wr"></li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        var $i = 0;
+
+        $("img").mousedown(function () {
+            return false;
+        });
+
+        $(".list li img").mouseenter(function () {
+            clearInterval(timer);
+            $(this).css("border-color", "orange").parent().siblings().children().css("border-color", "#fff");
+            $i = $(".list li img").index(this);
+            $(".main li img").eq($i).css("visibility", "visible").parent().siblings().children().css(
+                "visibility", "hidden");
+            $(".main li img").eq($i).stop(true, true).slideDown(1000).parent().siblings().children().slideUp(
+                1000)
+        });
+
+        $(".main li img").hover(function () {
+            clearInterval(timer);
+            $("#box>img").css("visibility", "visible");
+            $("#box>img").stop(true, true).fadeIn(200);
+        }, function () {
+            $("#box>img").css("visibility", "hidden");
+            $("#box>img").stop(true, true).fadeOut(200);
+        });
+
+        $("#box>img").mouseenter(function () {
+            clearInterval(timer);
+            $("#box>img").css("visibility", "visible");
+            $("#box>img").stop(true, true).fadeIn(200);
+        })
+
+        $("#box").hover(function () {
+            clearInterval(timer);
+        }, function () {
+            timer = setInterval(auto, 1000);
+        })
+
+        function auto() {
+            $(".list li img").eq($i).css("border-color", "orange").parent().siblings().children().css("border-color",
+                "#fff");
+            $(".main li img").eq($i).css("visibility", "visible").parent().siblings().children().css(
+                "visibility", "hidden");
+            $(".main li img").eq($i).stop(true, true).fadeIn(300).parent().siblings().children().fadeOut(300);
+            $i++;
+            $i = $i % 7;
+        }
+
+        var timer = setInterval(auto, 1500);
+    </script>
+</body>
+
+</html>

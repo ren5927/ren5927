@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box {
+            width: 480px;
+            height: 300px;
+            border: 0px dotted #000;
+            margin: 100px auto 0 auto;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        #box2 {
+            width: 480px;
+            height: 35px;
+            font-size: 0;
+            margin: 0 auto;
+        }
+
+        ul {
+            width: 500%;
+            height: 100%;
+            margin-left: 0;
+            transition: margin-left .5s;
+        }
+
+        li {
+            list-style: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        img {
+            width: 480px;
+            height: 300px;
+        }
+
+        span {
+            display: inline-block;
+            width: 96px;
+            height: 35px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 35px;
+            cursor: pointer;
+        }
+
+        .bclick {
+            background-color: #323232;
+            color: #f2f2f2;
+        }
+
+        .aclick {
+            background-color: #f2f2f2;
+            color: #323232;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li><img src="./img/sh1.jpg"></li>
+            <li><img src="./img/sh2.jpg"></li>
+            <li><img src="./img/sh3.jpg"></li>
+            <li><img src="./img/sh4.jpg"></li>
+            <li><img src="./img/sh5.jpg"></li>
+        </ul>
+    </div>
+    <div id="box2">
+        <span class="aclick">1</span>
+        <span class="bclick">2</span>
+        <span class="bclick">3</span>
+        <span class="bclick">4</span>
+        <span class="bclick">5</span>
+    </div>
+    <script>
+        var aBtn = document.querySelectorAll("span");
+        var aUl = document.querySelector("ul");
+        var aDiv = document.getElementsByTagName("div");
+        var len = aBtn.length;
+        var num = 0;
+        for (var i = 0; i < len; i++) {
+            aBtn[i].index = i;
+            aBtn[i].onclick = function () {
+                if (num == this.index) return;
+                aBtn[num].className = "bclick";
+                num = this.index;
+                aBtn[num].className = "aclick"
+                aUl.style.marginLeft = num * (-480) + 'px';
+            }
+        }
+
+        function f1() {
+            aBtn[num].className = "bclick";
+            num++;
+            num %= 5;
+            aBtn[num].className = "aclick"
+            aUl.style.marginLeft = num * (-480) + 'px';
+        }
+        var timer = setInterval(f1, 1000);
+
+        aDiv[0].onmouseenter = function () {
+            clearInterval(timer);
+        }
+        aDiv[0].onmouseleave = function () {
+            timer = setInterval(f1,1000);
+        }
+
+        aDiv[1].onmouseenter = function () {
+            clearInterval(timer);
+        }
+        aDiv[1].onmouseleave = function () {
+            timer = setInterval(f1, 1000);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            user-select: none;
+        }
+
+        #btn {
+            width: 120px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .aqua {
+            background-color: aqua;
+            color: floralwhite;
+        }
+
+        .black {
+            background-color: black;
+            color: bisque;
+        }
+
+        .pink {
+            background-color: pink;
+            color: chartreuse;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="btn" class="aqua">
+        按钮
+    </div>
+    <script>
+        var oBtn = document.getElementById("btn");
+        var classArr = ["aqua", "black", "pink"]
+        var num = 0
+        btn.onclick = function () {
+            oBtn.className = classArr[(++num)% 3];
+        }
+    </script>
+</body>
+
+</html>

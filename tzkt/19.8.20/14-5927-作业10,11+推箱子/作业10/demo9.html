@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box {
+            width: 300px;
+            height: 520px;
+            margin: 70px auto 0;
+        }
+
+        li {
+            width: 300px;
+            height: 50px;
+            background-color: #ccc;
+            list-style: none;
+            margin-top: 10px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        /* 选中后的字体颜色 */
+        .col {
+            color: red;
+        }
+
+        #box2 {
+            width: 300px;
+            height: 40px;
+            background-color: #323232;
+            font-size: 20px;
+            color: #f2f2f2;
+            border-radius: 0 0 10px 10px;
+            margin: 10px auto 0;
+        }
+
+        .xx>span {
+            display: block;
+            width: 300px;
+            height: 40px;
+            background-color: #323232;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #box2>span {
+            display: inline-block;
+            width: 50px;
+            height: 40px;
+            cursor: pointer;
+            margin: 5px 0 0 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- 选项 -->
+        <ul class="xx">
+            <span></span>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+        </ul>
+    </div>
+    <div id="box2">
+        <span id="btn">全选</span>
+        <span id="unbtn">反选</span>
+    </div>
+    <script>
+        var aLi = document.querySelectorAll(".xx>li");
+        var oBtn = document.getElementById("btn");
+        var oUnbtn = document.getElementById("unbtn");
+        var len = aLi.length;
+        var arr = [0, 0, 0, 0, 0, 0, 0, 0];
+
+        for (var i = 0; i < len; i++) {
+            aLi[i].index = i;
+            aLi[i].addEventListener("click", function () {
+                aLi[this.index].classList.toggle("col");
+                aLi[this.index].classList.value == "col" ? arr[this.index] = 1 : arr[this.index] = 0;
+                arr.indexOf(0) == -1 ? oBtn.classList.add("col") : oBtn.classList.remove("col");
+            }, false);
+        }
+
+        oBtn.addEventListener("click", function () {
+            oBtn.classList.toggle("col");
+            for (var j = 0; j < len; j++) {
+                oBtn.classList.value == "col" ? aLi[j].classList.add("col") : aLi[j].classList.remove("col");
+                oBtn.classList.value == "col" ? arr = [1, 1, 1, 1, 1, 1, 1, 1] : arr = [0, 0, 0, 0, 0, 0, 0, 0];
+            }
+        }, false);
+
+        oUnbtn.addEventListener("click", function () {
+            for (var k = 0; k < len; k++) {
+                aLi[k].classList.toggle("col");
+                aLi[k].classList.value == "col" ? arr[k] = 1 : arr[k] = 0;
+            }
+            arr.indexOf(0) !== -1 ? oBtn.classList.remove("col") : oBtn.classList.add("col");
+        }, false);
+    </script>
+</body>
+
+</html>

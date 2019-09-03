@@ -1,0 +1,12 @@
+{
+    "liveServer.settings.CustomBrowser": "chrome",
+    "background.useDefault": false,
+    "background.customImages": [
+        "E:/Game/1/1.jpg"
+    ],
+    "background.style": {
+        "opacity": 1,
+        "z-index": "999",
+    },
+    
+}

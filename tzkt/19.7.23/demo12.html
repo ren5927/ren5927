@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box {
+            width: 600px;
+            height: 300px;
+            margin: 100px auto 0 auto;
+            position: relative;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #box>span {
+            width: 30px;
+            height: 40px;
+            display: inline-block;
+            background-color: #000;
+            opacity: 0.5;
+            cursor: pointer;
+            color: #f2f2f2;
+            font-size: 30px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .left {
+            position: absolute;
+            left: 0;
+            top: 45%;
+        }
+
+        .right {
+            position: absolute;
+            right: 0;
+            top: 45%;
+        }
+
+        li>img {
+            width: 600px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .none {
+            display: none;
+        }
+
+        #box2 {
+            width: 600px;
+            height: 30px;
+            margin: 0 auto;
+            font-size: 0;
+        }
+
+        #box2>span {
+            width: 120px;
+            height: 40px;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .beforeclick {
+            background-color: #000;
+            color: #f2f2f2;
+        }
+
+        .clicked {
+            background-color: gray;
+            color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li class=""><img src="./img/sh1.jpg"></li>
+            <li class="none"><img src="./img/sh2.jpg"></li>
+            <li class="none"><img src="./img/sh3.jpg"></li>
+            <li class="none"><img src="./img/sh4.jpg"></li>
+            <li class="none"><img src="./img/sh5.jpg"></li>
+        </ul>
+        <span class="left">&lt;</span>
+        <span class="right">&gt;</span>
+    </div>
+    <div id="box2">
+        <span class="clicked">1</span>
+        <span class="beforeclick">2</span>
+        <span class="beforeclick">3</span>
+        <span class="beforeclick">4</span>
+        <span class="beforeclick">5</span>
+    </div>
+    <script>
+        var aBtn = document.querySelectorAll("#box2>span");
+        var aBtn2 = document.querySelectorAll("#box>span");
+        var aLi = document.querySelectorAll("#box>ul>li")
+        var num = 0;
+        var len = aBtn.length;
+        aBtn2[0].onclick = function () {
+            f1(true);
+        }
+        aBtn2[1].onclick = function () {
+            f1(false);
+        }
+
+        function f1(bol) {
+            aLi[num].className = "none";
+            aBtn[num].className = 'beforeclick'
+            if (bol) {
+                num = (num == 0) ? 5 : num;
+                num--;
+            } else {
+                num = (num == 4) ? (-1) : num;
+                num++;
+            }
+            aLi[num].className = ""
+            aBtn[num].className = 'clicked'
+        }
+        for (i = 0; i < len; i++) {
+            aBtn[i].index = i;
+            aBtn[i].onclick = function () {
+                aBtn[num].className = "beforeclick";
+                aLi[num].className = "none";
+                num=this.index;
+                aBtn[this.index].className = "clicked";
+                aLi[this.index].className = "";
+            }
+        }
+    </script>
+</body>
+
+</html>

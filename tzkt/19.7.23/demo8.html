@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box {
+            width: 55px;
+            height: 600px;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: absolute;
+            left: -55px;
+        }
+
+        span {
+            width: 60px;
+            height: 60px;
+            background-color: aqua;
+            color: #f2f2f2;
+            display: inline-block;
+            font-size: 40px;
+            text-align: center;
+            line-height: 55px;
+            cursor: pointer;
+            position: absolute;
+            left: 0;
+            top: 470px;
+        }
+
+        li {
+            width: 55px;
+            height: 55px;
+            margin-top: 30px;
+            position: relative;
+            list-style: none;
+        }
+
+        img {
+            margin: 7px 7px;
+        }
+
+        .mouseenter {
+            background-color: bisque;
+            border-radius: 7px 0px 0px 7px;
+        }
+
+        .mouseenter2 {
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+            border-radius: 0 10px 10px 0;
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 55px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li class="">
+                <img src="./img/7.png">
+                <div class=""></div>
+            </li>
+            <li>
+                <img src="./img/7.png">
+                <div></div>
+            </li>
+
+            <li>
+                <img src="./img/7.png">
+                <div></div>
+            </li>
+            <li>
+                <img src="./img/7.png">
+                <div></div>
+            </li>
+            <li>
+                <img src="./img/7.png">
+                <div></div>
+            </li>
+        </ul>
+    </div>
+    <div><span>&gt;</span></div>
+
+    <script>
+        var oBtn = document.querySelector("span");
+        var oBox = document.getElementById("box");
+        var aLi = document.querySelectorAll("#box>ul>li");
+        var aDiv = document.querySelectorAll("#box>ul>li>div");
+
+        var len = aLi.length;
+        var mark = true;
+        var num = 0;
+
+        oBtn.onclick = function () {
+            oBtn.innerHTML = mark ? "&lt;" : "&gt;"
+            num = mark ? 0 : -55;
+            oBox.style.left = num + "px";
+            mark = !mark;
+        }
+        // for (var i = 0; i < len; i++) {
+        //     aLi[i].index=i;
+        //     aLi[i].onmouseenter = function () {
+        //         this.className = "mouseenter";
+        //         console.log(aDiv[this.index]);
+        //         aDiv[this.index].className = "mouseenter2";
+        //     }
+        //     aLi[i].onmouseleave = function () {
+        //         this.className = "";
+        //         console.log(aDiv[this.index]);
+
+        //         aDiv[this.index].className = "";
+        //     }
+        // }
+        for (var i = 0; i < len; i++) {
+                aLi[i].onmouseenter = function () {
+                    this.className = "mouseenter";
+                    this.lastElementChild.className = "mouseenter2";
+                }
+                aLi[i].onmouseleave = function () {
+                    this.className = "";
+                    this.lastElementChild.className = "";
+                }
+            }
+    </script>
+</body>
+
+</html>

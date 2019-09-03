@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        div {
+            width: 410px;
+            height: 240px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .ul1>li {
+            display: block;
+            width: 80px;
+            height: 30px;
+            margin-top: 5px;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+
+        .black {
+            background-color: #000;
+        }
+
+        .gold {
+            background-color: gold;
+        }
+
+        .ul2 {
+            position: absolute;
+            top: 0;
+            left: 85px;
+        }
+
+        .btn {
+            width: 200px;
+            height: 25px;
+            position: absolute;
+            left: 10px;
+            top: 170px;
+        }
+
+        .btn>li {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+            line-height: 25px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .img {
+            width: 326px;
+            height: 240px;
+            position: absolute;
+            left: 90xp;
+            top: 0;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .on {
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul class="ul1">
+            <li class="gold">豪车</li>
+            <li class="black">美味</li>
+            <li class="black">风景</li>
+        </ul>
+        <ul class="ul2">
+            <li class="img">
+                <ul class="tab">
+                    <li class=""><img src="./img/image/1.jpg"></li>
+                    <li class="none"><img src="./img/image/2.jpg"></li>
+                    <li class="none"><img src="./img/image/3.jpg"></li>
+                    <li class="none"><img src="./img/image/4.jpg"></li>
+                </ul>
+                <ul class="btn">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </li>
+            <li class="img none">
+                <ul class="tab">
+                    <li><img src="./img/image/m1.jpg"></li>
+                    <li class="none"><img src="./img/image/m2.jpg"></li>
+                    <li class="none"><img src="./img/image/m3.jpg"></li>
+                    <li class="none"><img src="./img/image/m4.jpg"></li>
+                    <li class="none"><img src="./img/image/m5.jpg"></li>
+                </ul>
+                <ul class="btn">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </li>
+            <li class=" img none">
+                <ul class="tab">
+                    <li><img src="./img/image/s1.jpg"></li>
+                    <li class="none"><img src="./img/image/s2.jpg"></li>
+                    <li class="none"><img src="./img/image/s3.jpg"></li>
+                    <li class="none"><img src="./img/image/s4.jpg"></li>
+                    <li class="none"><img src="./img/image/s5.jpg"></li>
+                </ul>
+                <ul class="btn">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        var aLi1 = document.querySelectorAll(".ul1>li");
+        var aLi2 = document.querySelectorAll(".btn>li");
+        var aImg = document.getElementsByClassName("img");
+        var aTab = document.querySelectorAll(".tab");
+        var aBtn = document.querySelectorAll(".btn");
+        var allImg = [];
+        var allBtn = [];
+        var len1 = aBtn.length;
+        var len = aLi1.length;
+        var index = 0;
+
+        for (var i = 0; i < len; i++) {
+            aLi1[i].index = i;
+            aLi1[i].onmouseenter = function () {
+                if (index == this.index) return;
+                aLi1[index].className = "black";
+                aImg[index].classList.add("none");
+                index = this.index;
+                aLi1[this.index].className = "gold";
+                aImg[index].classList.remove("none");
+            }
+        }
+        // var s=0;
+        // for (var a = 0; a < len1; a++) {
+        //     allImg[a] = aTab[a].querySelectorAll("li");
+        //     allBtn[a] = aBtn[a].querySelectorAll("li");
+
+        //     for (b = 0; b < allBtn[a].length; b++) {
+        //         allBtn[a][b].index = [a, b];
+
+        //         allBtn[a][b].onmouseenter = function () {
+        //             var k = 0;
+        //             if (s == this.index[1]) return;
+        //             if ((aLi1[0].className.indexOf("gold")!=-1)&& s >=3) {
+        //                 s = 3;
+        //             }
+        //             allImg[this.index[0]][k].classList.add("none");
+        //             allImg[this.index[0]][s].classList.add("none");
+        //             s = this.index[1];
+        //             allImg[this.index[0]][s].classList.remove("none");
+        //         }
+        //     }
+        // }
+        //自己写的还存在bug
+
+        for (var a = 0; a < len1; a++) {
+            allImg[a] = aTab[a].querySelectorAll("li");
+            allBtn[a] = aBtn[a].querySelectorAll("li");
+            allBtn[a].showJ= 0;
+            for (b = 0; b < allBtn[a].length; b++) {
+                allBtn[a][b].index = [a, b];
+                allBtn[a][b].onmouseenter = function () {
+                    var x=this.index[0];
+                    var y=allBtn[x].showJ;
+
+                    if (y== this.index[1]) return;
+                    allImg[x][y].classList.add("none");
+                    allBtn[x].showJ= y=this.index[1];
+                    allImg[x][y].classList.remove("none");
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

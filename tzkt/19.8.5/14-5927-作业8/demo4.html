@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box {
+            width: 480px;
+            height: 300px;
+            border: 0px dotted #000;
+            margin: 100px auto 0 auto;
+            font-size: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #box2 {
+            width: 480px;
+            height: 35px;
+            font-size: 0;
+            margin: 0 auto;
+        }
+
+        ul {
+            width: 700%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: -100%;
+        }
+
+        li {
+            list-style: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        img {
+            width: 480px;
+            height: 300px;
+        }
+
+        #box2>span {
+            display: inline-block;
+            width: 96px;
+            height: 35px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 35px;
+            cursor: pointer;
+        }
+
+        .bclick {
+            background-color: #323232;
+            color: #f2f2f2;
+        }
+
+        .aclick {
+            background-color: #f2f2f2;
+            color: #323232;
+        }
+
+        #box>span {
+            display: inline-block;
+            width: 30px;
+            height: 40px;
+            background-color: #000;
+            opacity: 0.7;
+            font-size: 20px;
+            color: #f2f2f2;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .left {
+            position: absolute;
+            top: 45%;
+            left: 0;
+        }
+
+        .right {
+            position: absolute;
+            top: 45%;
+            right: 0;
+        }
+
+        .tran {
+            transition: left .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul class="tran">
+            <li><img src="./img/sh5.jpg"></li>
+
+            <li><img src="./img/sh1.jpg"></li>
+            <li><img src="./img/sh2.jpg"></li>
+            <li><img src="./img/sh3.jpg"></li>
+            <li><img src="./img/sh4.jpg"></li>
+            <li><img src="./img/sh5.jpg"></li>
+
+            <li><img src="./img/sh1.jpg"></li>
+        </ul>
+        <span class="left">&lt;</span>
+        <span class="right">&gt;</span>
+    </div>
+    <div id="box2">
+        <span class="aclick">1</span>
+        <span class="bclick">2</span>
+        <span class="bclick">3</span>
+        <span class="bclick">4</span>
+        <span class="bclick">5</span>
+    </div>
+    <script>
+        var aBtn = document.querySelectorAll("#box2>span");
+        var aBtn2 = document.querySelectorAll("#box>span");
+        var aUl = document.querySelector("ul");
+        var aDiv = document.getElementsByTagName("div");
+        var len = aBtn.length;
+        var num = 0;
+
+        for (var i = 0; i < len; i++) {
+            aBtn[i].index = i;
+            aBtn[i].onclick = function () {
+                if (num == this.index) return;
+                aBtn[num].className = "bclick";
+                num = this.index;
+                aBtn[num].className = "aclick"
+                aUl.style.left = (num + 1) * -100 + '%';
+            }
+        }
+
+        aBtn2[0].onclick = function () {
+            // aUl.classList.add("tran");
+
+            // aUl.style.left = num * (-100) + "%";
+            // aBtn[num].className = "bclick";
+            // num--;
+            // if (num == -1) {
+            //     num = 4;
+            //     setTimeout(function () {
+            //         aUl.classList.remove("tran");
+            //         aUl.style.left = (num + 1) * (-100) + "%";
+            //     }, 500);
+
+            // }
+            // aBtn[num].className = "aclick"
+            f1(true);
+
+        }
+        aBtn2[1].onclick = function () {
+            // aUl.classList.add("tran");
+            // aBtn[num].className = "bclick";
+            // aUl.style.left = (num + 2) * (-100) + "%";
+            // num++;
+            // if (num == 5) {
+            //     num = 0;
+            //     setTimeout(function () {
+            //         aUl.classList.remove("tran");
+            //         aUl.style.left = (num + 1) * (-100) + "%";
+
+            //     }, 500);
+
+            // }
+            // aBtn[num].className = "aclick"
+            f1(false);
+        }
+
+        function f1(bol) {
+            aUl.classList.add("tran");
+            aBtn[num].className = "bclick";
+            aUl.style.left = bol ? num * (-100) + "%" : (num + 2) * (-100) + "%";
+            num = bol ? --num : ++num;
+            if (bol) {
+                if (num == -1) {
+                    num = 4;
+                    setTimeout(f2, 500);
+                }
+            } else {
+                if (num == 5) {
+                    num = 0;
+                    setTimeout(f2, 500);
+                }
+            }
+            aBtn[num].className = "aclick"
+        }
+
+        function f2() {
+            aUl.classList.remove("tran");
+            aUl.style.left = (num + 1) * (-100) + "%";
+        }
+        var timer = setInterval(f1, 1000)
+
+        aDiv[0].onmouseenter = function () {
+            clearInterval(timer);
+        }
+        aDiv[0].onmouseleave = function () {
+            timer = setInterval(f1, 1000);
+        }
+
+        aDiv[1].onmouseenter = function () {
+            clearInterval(timer);
+        }
+        aDiv[1].onmouseleave = function () {
+            timer = setInterval(f1, 1000);
+        }
+    </script>
+</body>
+
+</html>

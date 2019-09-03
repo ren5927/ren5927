@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #000;
+            position: absolute;
+            z-index: 99;
+            /* top: 100px; */
+            /* left: 100px; */
+        }
+
+        p {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: pink;
+            position: absolute;
+            transform-origin: center center;
+            transform: scale(1);
+            transition: transform 0.8s, opacity 0.7s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="big"></div> -->
+    <!-- <div class="small"></div> -->
+    <script>
+        function Person() {
+            this.speedX = Math.random() * 20;
+            this.speedY = Math.random() * 20;
+            this.left = Math.random() * 100;
+            this.top = Math.random() * 100;
+            this.init();
+            this.run();
+        }
+
+        Person.prototype.init = function () {
+            this.dom = document.createElement("div");
+            document.body.appendChild(this.dom);
+        }
+
+        Person.prototype.run = function () {
+            var self = this;
+
+            function f1() {
+                self.left += self.speedX;
+                self.top += self.speedY;
+                (self.left <= 0 || self.left >= (innerWidth - 50)) && (self.speedX = -self.speedX);
+                (self.top <= 0 || self.top >= (innerHeight - 50)) && (self.speedY = -self.speedY);
+                self.dom.style.left = self.left + "px";
+                self.dom.style.top = self.top + "px";
+                create(self.left, self.top);
+                requestAnimationFrame(f1);
+            }
+            requestAnimationFrame(f1);
+        }
+
+        function create(left, top) {
+            var oP = document.createElement("p");
+            oP.style.left = left + 7 + "px";
+            oP.style.top = top + 7 + "px";
+            setTimeout(function () {
+                oP.style.transform = 'scale(0.2)';
+                oP.style.opacity = "0";
+            })
+            setTimeout(function () {
+                document.body.removeChild(oP);
+            }, 800)
+            document.body.appendChild(oP);
+        }
+
+        new Person();
+        new Person();
+        new Person();
+        new Person();
+        new Person();
+        new Person();
+        new Person();
+        
+
+    </script>
+</body>
+
+</html>

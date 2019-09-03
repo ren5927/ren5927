@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .menu {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: pink;
+            text-align: center;
+            line-height: 100px;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+
+        .allmenu {
+            display: block;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: greenyellow;
+            text-align: center;
+            line-height: 70px;
+        }
+
+        .menu2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .menu3 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .menu4 {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .menu5 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        .none {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <span class="menu">菜单</span>
+        <span class="allmenu menu2 none">首页</span>
+        <span class="allmenu menu3 none">文章</span>
+        <span class="allmenu menu4 none">登录</span>
+        <span class="allmenu menu5 none">注册</span>
+    </div>
+    <script>
+        var oMenu = document.getElementsByClassName("menu");
+        var aMenu = document.getElementsByClassName("allmenu");
+        var len = aMenu.length;
+        oMenu[0].onclick = function () {
+            oMenu[0].style.display = "none"
+            for (i = 0; i < len; i++) {
+                aMenu[i].classList.remove("none");
+            }
+        }
+    </script>
+</body>
+
+</html>

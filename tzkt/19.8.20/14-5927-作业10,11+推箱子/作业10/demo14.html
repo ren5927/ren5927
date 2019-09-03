@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+            user-select: none;
+        }
+
+        div {
+            width: 178px;
+            height: 100px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        li {
+            list-style: none;
+            width: 178px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        img {
+            width: 178px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><img src="./img/sh1.jpg"></li>
+            <li><img src="./img/sh2.jpg"></li>
+            <li><img src="./img/sh3.jpg"></li>
+            <li><img src="./img/sh4.jpg"></li>
+            <li><img src="./img/sh5.jpg"></li>
+        </ul>
+    </div>
+    <script>
+        var aLi = document.querySelectorAll("li");
+        var oBox = document.querySelector("div");
+        var wW, wH, w, h, leftMax, topMax;
+        var index = 0;
+        var time = 0;
+        document.onmousedown = function (ev) {
+            clearInterval(time);
+
+            ev = ev || window.event;
+
+            // 处理事件源
+            var target = ev.target || ev.srcElement;
+            var parent = ev.target.parentNode;
+            if (parent.nodeName == "LI") {
+                var oldL = ev.clientX;
+                var oldT = ev.clientY;
+
+                var starL = parent.offsetLeft;
+                var starT = parent.offsetTop;
+                var nowX, nowY, _x, _y;
+                ev.preventDefault();
+                This = parent;
+
+
+                document.onmousemove = function (ev) {
+                    ev = ev || window.ev;
+
+                    _x = ev.clientX - nowX || 0;
+                    _y = ev.clientY - nowY || 0;
+
+                    nowX = ev.clientX;
+                    nowY = ev.clientY;
+                    var newL = ev.clientX;
+                    var newT = ev.clientY;
+
+
+                    var x = newL - oldL + starL;
+                    var y = newT - oldT + starT;
+                    x = Math.min(x, leftMax);
+                    x = Math.max(x, -leftMax);
+                    y = Math.min(y, topMax);
+                    y = Math.max(y, -topMax);
+
+                    This.style.left = x + "px";
+                    This.style.top = y + "px";
+                    This.style.zIndex = ++index;
+                }
+
+                document.onmouseup = function () {
+                    this.onmousemove = null;
+                    this.onmouseup = null;
+
+
+                    time = setInterval(function () {
+                        _x *= 0.9;
+                        _y *= 0.9;
+                        var nLeft = parent.offsetLeft + _x;
+                        var nTop = parent.offsetTop + _y;
+                        if (nLeft > leftMax || nLeft < -leftMax) {
+                            _x = -_x;
+                        }
+                        if (nTop > topMax || nTop < -topMax) {
+                            _y = -_y;
+                        }
+                        nLeft = Math.min(nLeft, leftMax);
+                        nLeft = Math.max(nLeft, -leftMax);
+                        nTop = Math.min(nTop, topMax);
+                        nTop = Math.max(nTop, -topMax);
+
+                        This.style.left = nLeft + "px";
+                        This.style.top = nTop + "px";
+
+                        if (Math.abs(_x) < 0.5 && Math.abs(_y) < 0.5) {
+                            clearInterval(time);
+
+                        }
+                    }, 20)
+
+                }
+            }
+        }
+
+        function getView() {
+            if (innerWidth) {
+                return {
+                    w: innerWidth,
+                    h: innerHeight
+                }
+            } else if (document.compatMode == CSS1compat) {
+                return {
+                    w: document.documentElement.clientWidth,
+                    h: document.documentElement.clientHeight
+                }
+            } else {
+                return {
+                    w: document.body.clientWidth,
+                    h: document.body.clientHeight
+                }
+            }
+        }
+
+        function f1() {
+            var obj = getView();
+            wW = obj.w;
+            wH = obj.h;
+            w = oBox.clientWidth;
+            h = oBox.clientHeight;
+            leftMax = (wW - w) / 2;
+            topMax = (wH - h) / 2;
+        }
+        f1();
+        window.onresize = f1;
+    </script>
+</body>
+
+</html>

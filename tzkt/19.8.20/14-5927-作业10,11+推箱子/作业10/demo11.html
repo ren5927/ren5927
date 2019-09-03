@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 699px;
+            height: 399px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 100px auto 0;
+        }
+
+        input {
+            width: 150px;
+            height: 30px;
+            margin: 20px;
+        }
+
+        button {
+            width: 80px;
+            height: 30px;
+        }
+
+        p {
+            font-size: 20px;
+            margin-top: 25px;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" placeholder="搜索内容">
+        <button>搜索</button>
+        <input type="text" placeholder="替换内容">
+        <button>替换</button>
+        <button>重置</button>
+        <hr color="#ccc">
+        <p>张家界是湖南省辖地级市，原名大庸市，辖2个市辖区（永定区、武陵源区）、2个县（慈利县、桑植县）。位于湖南西北部，澧水中上游，属武陵山区腹地。[1]
+            张家界因旅游建市，是中国最重要的旅游城市之一，是湘鄂渝黔革命根据地的发源地和中心区域。
+            <br>
+            1982年9月，张家界国家森林公园成为中国第一个国家森林公园。
+            <br>
+            1988年8月，张家界武陵源风景名胜区被列入国家重点风景名胜区；1992年，由张家界国家森林公园等三大景区构成的武陵源风景名胜区被联合国教科文组织列入
+            《世界自然遗产名录》；2004年2月，被列入全球首批《世界地质公园》；2007年，被列入中国首批国家5A级旅游景区。
+        </p>
+    </div>
+    <script>
+        var oP = document.querySelector("p");
+        var aBtn = document.querySelectorAll("button");
+        var aText = document.querySelectorAll("input");
+
+        var str1 = oP.innerHTML;
+        var str2 = str1;
+        aBtn[0].onclick = function () {
+            // console.log(1);
+            // console.log(aText[0].value);
+            if (aText[0].value.trim() == "") return;
+            if (str1.indexOf(aText[0].value) == -1) return;
+            var arr = str1.split(aText[0].value);
+            oP.innerHTML = arr.join("<span>" + aText[0].value + "</span>")
+        }
+        aBtn[1].onclick = function () {
+            // console.log(2);
+            oP.innerHTML = str1;
+            if (aText[0].value.trim() == "") return;
+            if (str1.indexOf(aText[0].value) == -1) return;
+            if (aText[1].value.trim() == "") return;
+            var arr = str1.split(aText[0].value);
+            oP.innerHTML = arr.join("<span>" + aText[1].value + "</span>");
+            str1 = arr.join(aText[1].value);
+        }
+        aBtn[2].onclick = function () {
+            if (str2 == oP.innerHTML) return;
+            oP.innerHTML = str2;
+        }
+    </script>
+</body>
+
+</html>

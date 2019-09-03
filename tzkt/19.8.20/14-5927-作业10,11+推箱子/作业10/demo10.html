@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        div {
+            width: 1110px;
+            height: 720px;
+            margin: 50px 0 0px 130px;
+            border: 1px solid #ccc;
+            text-align: right;
+        }
+
+        li {
+            list-style: none;
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 272px;
+            height: 300px;
+        }
+
+        span {
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            background-color: #323232;
+            color: #f2f2f2;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            margin: 3px 20px 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li>
+                <img src="./img/sp/1.jpg">
+                <p>k20 pro 黑色 ￥1000</p>
+            </li>
+            <li><img src="./img/sp/2.jpg">
+                <p>k20 pro 蓝色 ￥2000</p>
+            </li>
+            <li><img src="./img/sp/3.jpg">
+                <p>k20 pro 红色 ￥3000</p>
+            </li>
+            <li><img src="./img/sp/4.jpg">
+                <p>k20 pro 白色 ￥4000</p>
+            </li>
+        </ul>
+
+        <ul>
+            <li><img src="./img/sp/5.jpg">
+                <p>mi8探索 ￥5000</p>
+            </li>
+            <li><img src="./img/sp/6.jpg">
+                <p>mi9探索￥6000</p>
+            </li>
+            </li>
+            <li><img src="./img/sp/7.jpg">
+                <p>mix3 ￥7000</p>
+            </li>
+            </li>
+            <li><img src="./img/sp/8.jpg">
+                <p>mix2s ￥8000</p>
+            </li>
+            </li>
+        </ul>
+
+        <span>随机排序</span>
+        <span>从低到高</span>
+        <span>从高到低</span>
+    </div>
+    <script>
+        var aBtn = document.querySelectorAll("span");
+        var ali = document.querySelectorAll("span");
+        var aImg=document.querySelectorAll("img");
+        var aP = document.querySelectorAll("p");
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8];
+        var obj = {
+            "0": "k20 pro 黑色 ￥1000",
+            "1": "k20 pro 蓝色 ￥2000",
+            "2": "k20 pro 红色 ￥3000",
+            "3": "k20 pro 白色 ￥4000",
+            "4": "mi8探索 ￥5000",
+            "5": "mi9探索 ￥6000",
+            "6": "mix3 ￥7000",
+            "7": "mix2s ￥8000",
+        }
+
+        aBtn[0].addEventListener("click", function () {
+            arr.sort(function () {
+                return Math.random() - 0.5;
+            })
+           f1();
+           
+        }, false);
+
+        aBtn[1].addEventListener("click", function () {
+            arr.sort();
+            f1();
+        }, false)
+
+        aBtn[2].addEventListener("click", function () {
+            // arr.sort(function(){
+            //     return -1
+            // });
+            arr.sort();
+            arr.reverse();
+            f1();
+        }, false)
+        
+        function f1() {
+            for (var i = 0; i < 8; i++) {
+                aImg[i].src="./img/sp/"+arr[i]+".jpg"
+                aP[i].innerHTML=obj[arr[i]-1];
+            }
+        }
+    </script>
+</body>
+
+</html>
